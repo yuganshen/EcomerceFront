@@ -1,0 +1,187 @@
+    /* Fondo animado */
+    body {
+      background: linear-gradient(135deg, #0f0f1f, #1a082d, #000);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glow dinámico */
+    .card-glow:hover {
+      box-shadow: 0 0 30px rgba(186, 85, 255, 0.8), 0 0 60px rgba(138, 43, 226, 0.6);
+      transform: scale(1.05) rotate3d(1, 1, 0, 5deg);
+      transition: all 0.4s ease;
+    }
+
+    /* Gradiente animado en precios */
+    .price-gradient {
+      background: linear-gradient(90deg, #a855f7, #ec4899, #9333ea, #a855f7);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* Etiqueta de oferta animada */
+    .offer-badge {
+      position: absolute;
+      top: 10px;
+      right: -20px;
+      transform: rotate(15deg);
+      background: linear-gradient(to right, #ff0080, #7928ca);
+      padding: 6px 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 8px;
+      animation: pulse 2s infinite;
+      z-index: 10;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: rotate(15deg) scale(1); }
+      50% { opacity: 0.7; transform: rotate(15deg) scale(1.1); }
+    }
+
+    /* Best Seller Badge */
+    .bestseller-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #000;
+      border-radius: 8px;
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.5);
+    }
+
+    /* Coming Soon Badge */
+    .coming-soon-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 8px;
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Modal Glassmorphism */
+    .modal-glass {
+      background: rgba(20, 20, 35, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: zoomIn 0.4s ease;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Botón neon */
+    .btn-neon {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: #fff;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-neon:hover {
+      box-shadow: 0 0 20px #9333ea, 0 0 40px #a855f7;
+      transform: scale(1.05);
+    }
+
+    /* Countdown Timer Styles */
+    .countdown-container {
+      background: linear-gradient(135deg, #7928ca, #ff0080);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(255, 0, 128, 0.4);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 10px 40px rgba(255, 0, 128, 0.4); }
+      50% { box-shadow: 0 10px 60px rgba(255, 0, 128, 0.7); }
+    }
+
+    .countdown-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 80px;
+      backdrop-filter: blur(10px);
+    }
+
+    .countdown-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    .countdown-label {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 12px;
+    }
+    .section-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, #a855f7, #ec4899);
+      border-radius: 2px;
+    }
+
+    /* Banner Styles */
+    .promo-banner {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6, #6366f1);
+      background-size: 200% 200%;
+      animation: gradientShift 5s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Upcoming Product Overlay */
+    .upcoming-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .upcoming-card:hover .upcoming-overlay {
+      opacity: 1;
+    }

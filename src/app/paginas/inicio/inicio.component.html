@@ -1,0 +1,289 @@
+<header ><app-navbar></app-navbar> </header>
+
+<div class="text-white min-h-screen flex flex-col">
+  <section class="text-center py-20 relative mt-16">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-purple-400 drop-shadow-lg">Catálogo de Productos</h1>
+    <p class="mt-4 text-gray-300">Descubre lo último en tecnología: Teclados, Ratones, Monitores y Laptops</p>
+    
+
+    <div class="absolute top-10 left-10 w-32 h-32 bg-purple-700 rounded-full blur-3xl opacity-40"></div>
+    <div class="absolute bottom-10 right-10 w-40 h-40 bg-pink-600 rounded-full blur-3xl opacity-40"></div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 mb-12">
+    <div class="countdown-container">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-2">⚡ OFERTA FLASH ⚡</h2>
+        <p class="text-white text-lg">¡Descuentos increíbles por tiempo limitado!</p>
+      </div>
+
+      <div class="flex justify-center gap-4 flex-wrap">
+        <div class="countdown-box text-center">
+          <div class="countdown-number" id="days">00</div>
+          <div class="countdown-label">Días</div>
+        </div>
+        <div class="countdown-box text-center">
+          <div class="countdown-number" id="hours">00</div>
+          <div class="countdown-label">Horas</div>
+        </div>
+        <div class="countdown-box text-center">
+          <div class="countdown-number" id="minutes">00</div>
+          <div class="countdown-label">Minutos</div>
+        </div>
+        <div class="countdown-box text-center">
+          <div class="countdown-number" id="seconds">00</div>
+          <div class="countdown-label">Segundos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO -->
+  <section class="max-w-7xl mx-auto px-6 mb-12">
+    <div class="promo-banner rounded-2xl p-8 text-center shadow-2xl">
+      <h3 class="text-3xl font-bold text-white mb-2">🎉 Envío Gratis en Compras Mayores a S/.500 🎉</h3>
+      <p class="text-white text-lg">+ 12 Meses de Garantía Extendida en Productos Seleccionados</p>
+    </div>
+  </section>
+
+  <!-- BUSCADOR Y FILTRO -->
+  <section class="max-w-7xl mx-auto p-6">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <input type="text" placeholder="Buscar productos..." class="w-full md:w-1/2 px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      
+      <select class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>Todos</option>
+        <option>Teclados</option>
+        <option>Ratones</option>
+        <option>Monitores</option>
+        <option>Laptops</option>
+        <option>Accesorios</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- MÁS VENDIDOS -->
+  <section class="max-w-7xl mx-auto px-6 mb-16">
+    <h2 class="text-4xl font-extrabold text-purple-300 mb-8 section-header">
+      <i class="fas fa-fire text-orange-500 mr-2"></i>Los Más Vendidos
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <!-- CARD 1 -->
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="bestseller-badge">
+          <i class="fas fa-crown mr-1"></i>¡Mouse Más Vendido!
+        </div>
+
+        <div class="offer-badge">-15%</div>
+
+        <img src="https://assets.razerzone.com/eeimages/support/products/1612/1612_razerdeathadderv2.png"
+             class="w-full h-48 object-contain bg-black p-4">
+
+        <div class="p-5">
+          <span class="text-xs uppercase bg-purple-600 px-2 py-1 rounded-full">Razer</span>
+          <h3 class="text-xl font-bold text-purple-300 mt-2">DeathAdder V2</h3>
+          <p class="text-gray-400 text-sm mt-1">Ratón Gaming Pro</p>
+
+          <div class="flex justify-between items-center mt-4">
+            <div>
+              <span class="text-sm text-gray-500 line-through">S/.299.00</span>
+              <span class="text-xl font-extrabold price-gradient block">S/.254.00</span>
+            </div>
+
+            <button class="btn-neon text-sm">Ver Más</button>
+          </div>
+        </div>
+      </div>
+       <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="bestseller-badge">
+          <i class="fas fa-crown mr-1"></i>¡Monitor Más Vendido!
+        </div>
+        <img src="https://www.asus.com/media/global/gallery/hhdxa6vxaje4n3lg_setting_xxx_0_90_end_2000.png" class="w-full h-48 object-contain bg-black p-4">
+        <div class="p-5">
+          <span class="text-xs uppercase bg-red-600 px-2 py-1 rounded-full">ASUS</span>
+          <h3 class="text-xl font-bold text-purple-300 mt-2">TUF Gaming VG27VQ</h3>
+          <p class="text-gray-400 text-sm mt-1">Monitor Curvo para juegos</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-xl font-extrabold price-gradient">S/.850.00</span>
+            <button class="btn-neon text-sm">Ver Más</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="bestseller-badge">
+          <i class="fas fa-crown mr-1"></i>¡Case Más Vendido!
+        </div>
+        <div class="offer-badge">-10%</div>
+        <img src="https://www.antryx.com/wp-content/uploads/2023/04/FX-900-White-01.png" class="w-full h-48 object-contain bg-black p-4">
+        <div class="p-5">
+          <span class="text-xs uppercase bg-blue-700 px-2 py-1 rounded-full">Antryx</span>
+          <h3 class="text-xl font-bold text-purple-300 mt-2">FX900 White</h3>
+          <p class="text-gray-400 text-sm mt-1">Case Gaming RGB</p>
+          <div class="flex justify-between items-center mt-4">
+            <div>
+              <span class="text-sm text-gray-500 line-through">S/.250.00</span>
+              <span class="text-xl font-extrabold price-gradient block">S/.200.00</span>
+            </div>
+            <button class="btn-neon text-sm">Ver Más</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="bestseller-badge">
+          <i class="fas fa-crown mr-1"></i>¡Teclado Más Vendido!
+        </div>
+        <img src="https://assets.razerzone.com/press/blackwidow/razer-blackwidow-chroma-v2.png" class="w-full h-48 object-contain bg-black p-4">
+        <div class="p-5">
+          <span class="text-xs uppercase bg-orange-500 px-2 py-1 rounded-full">Razer</span>
+          <h3 class="text-xl font-bold text-purple-300 mt-2">Blackwidow V3</h3>
+          <p class="text-gray-400 text-sm mt-1">Teclado Mecánico Pro</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-xl font-extrabold price-gradient">S/.349.00</span>
+            <button class="btn-neon text-sm">Ver Más</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TODOS LOS PRODUCTOS -->
+  <section class="max-w-7xl mx-auto px-6 mb-16">
+    <h2 class="text-4xl font-extrabold text-purple-300 mb-8 section-header">
+      <i class="fas fa-th-large text-purple-500 mr-2"></i>Todos los Productos
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+      <!-- Aquí van todas tus cards, tal cual como las copiaste -->
+       <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="offer-badge">-10%</div>
+        <img src="https://assets.razerzone.com/eeimages/support/products/1612/1612_razerdeathadderv2.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-purple-600 px-2 py-1 rounded-full">Razer</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">Razer DeathAdder V2</h2>
+          <p class="text-gray-300 mt-2">Sensor óptico Focus+, switches mecánicos Razer.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.259.00</span>
+            <button class="btn-neon" onclick="location.href='Detalle-producto.html?id=1'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <img src="https://content.ibuypower.com/cdn-cgi/image/width=3840,format=auto,quality=75/https://content.ibuypower.com/Images/Components/26801/Logitech-G502-HERO-01-1200.png?v=752a592eaa12ba84bad5e4ff6fe3473a9bad5e62" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-blue-700 px-2 py-1 rounded-full">Logitech</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">G502 HERO</h2>
+          <p class="text-gray-300 mt-2">Sensor HERO 25K, peso ajustable y 11 botones programables.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.329.00</span>
+            <button class="btn-neon" onclick="location.href='Detalle-producto.html?id=2'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="offer-badge">-5%</div>
+        <img src="https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Computer%20Accessories%20and%20Tablets%20Accessories/Images/260734_10_vynqje.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-green-600 px-2 py-1 rounded-full">HyperX</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">Pulsefire Surge</h2>
+          <p class="text-gray-300 mt-2">Iluminación RGB dinámica y precisión de 16000 DPI.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.299.90</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=3'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <img src="https://res.cloudinary.com/riqra/image/upload/w_656,h_656,c_limit,q_auto,f_auto/v1739983851/sellers/ss-imports/products/ijkrz1ddvglbdtreqgwy.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-red-600 px-2 py-1 rounded-full">Redragon</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">EISA K686-RGB-PRO</h2>
+          <p class="text-gray-300 mt-2">Inalámbrico, RGB dinámico y diseño único estilo anime.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.399.00</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=4'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <img src="https://assets.razerzone.com/press/blackwidow/razer-blackwidow-chroma-v2.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-orange-500 px-2 py-1 rounded-full">Razer</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">Blackwidow V3</h2>
+          <p class="text-gray-300 mt-2">Switches mecánicos, estructura de aluminio y full RGB.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.349.00</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=5'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="offer-badge">-8%</div>
+        <img src= "https://dojiw2m9tvv09.cloudfront.net/48881/product/X_g915-gallery-hero1167.png?106&time=1760105060" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-yellow-500 px-2 py-1 rounded-full text-black">Logitech</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">LIGHTSPEED G915 GAMING</h2>
+          <p class="text-gray-300 mt-2">Sofisticado diseño de incomparable belleza, resistencia y desempeño.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.249.00</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=6'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <img src="https://dlcdnwebimgs.asus.com/files/media/6e89591d-8122-4509-8707-1b8e9b4cdde5/img/rog_delta.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-cyan-600 px-2 py-1 rounded-full">ASUS</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">ROG Delta Gaming</h2>
+          <p class="text-gray-300 mt-2">Auriculares para juegos RGB con Hi-Res ESS Quad-DAC.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.700.00</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=7'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <img src="https://redragon.es/content/uploads/2021/04/ZEUS-B.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-pink-600 px-2 py-1 rounded-full">Redragon</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">Zeus X</h2>
+          <p class="text-gray-300 mt-2">Con retroiluminación RGB, un micrófono excepcional, construcción cómoda y robusta.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.250.00</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=8'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+        
+      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
+        <div class="offer-badge">-12%</div>
+        <img src="https://resource.logitech.com/content/dam/gaming/en/products/g733/gallery/g733-lilac-gallery-1.png" class="w-full h-56 object-contain bg-black">
+        <div class="p-6">
+          <span class="text-xs uppercase bg-purple-500 px-2 py-1 rounded-full">Logitech</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">G733</h2>
+          <p class="text-gray-300 mt-2">Auriculares inalámbricos para juegos LIGHTSPEED con LIGHTSYNC RGB.</p>
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-xl font-extrabold price-gradient">S/.300.00</span>
+            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=9'">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<app-footer></app-footer>

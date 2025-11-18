@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    /*@layer base {
+    button,
+    input,
+    textarea {
+        font-family: inherit;
+    }
+    }*/
+
+    body {
+      background: linear-gradient(135deg, #0f0f1f, #1a082d, #000);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
