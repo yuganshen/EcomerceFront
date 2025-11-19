@@ -15,19 +15,18 @@
       <!-- Dropdown Yo -->
       <li class="dropdown" (click)="toggleUserMenu()" #userMenu>
 
-  <a class="dropdown-link">Yo ▾</a>
+        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Yo</a>
 
-  <ul class="dropdown-menu" [class.show]="userOpen">
-    <li class="header">¡Bienvenido!</li>
-    <hr>
-    <li><a routerLink="/perfil">Mi Perfil</a></li>
-    <li><a routerLink="/compras">Historial</a></li>
-    <hr>
-    <li><a class="logout" (click)="logout()">Cerrar sesión</a></li>
-  </ul>
+        <ul class="dropdown-menu" [class.show]="userOpen">
+          <li class="header">¡Bienvenido!</li>
+          <hr>
+          <li><a routerLink="/perfil" class="dropdown-item">Mi Perfil</a></li>
+          <li><a routerLink="/compras" class="dropdown-item">Historial</a></li>
+          <hr>
+          <li><a class="logout" routerLink="/login" class="dropdown-item">Cerrar sesión</a></li>
+        </ul>
 
-</li>
-
+      </li>
 
       <li><a routerLink="/">Catálogo</a></li>
 
