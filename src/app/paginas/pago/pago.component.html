@@ -1,0 +1,155 @@
+<app-navbar></app-navbar>
+
+<div class="container py-4">
+  <h4 class="fw-bold mb-4 blanco">Pago</h4>
+
+  <div class="row">
+    <!-- Sección izquierda -->
+    <div class="col-lg-8">
+
+      <!-- Comprobante -->
+      <div class="mb-4">
+        <h6 class="fw-bold blanco">Selecciona tu comprobante de pago</h6>
+
+        <div class="btn-group w-100" role="group">
+          <input type="radio" class="btn-check" id="boleta" name="comprobante"
+                 (change)="comprobante='boleta'" [checked]="comprobante==='boleta'">
+          <label class="btn btn-outline-primary" for="boleta">Boleta</label>
+
+          <input type="radio" class="btn-check" id="factura" name="comprobante"
+                 (change)="comprobante='factura'" [checked]="comprobante==='factura'">
+          <label class="btn btn-outline-primary" for="factura">Factura</label>
+        </div>
+      </div>
+
+      <!-- Modalidad de entrega -->
+      <div class="mb-4">
+        <h6 class="fw-bold blanco">Selecciona modalidad de entrega</h6>
+
+        <div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" id="recojo"
+                name="entrega" (change)="entrega='recojo'" [checked]="entrega==='recojo'">
+            <label class="form-check-label blanco" for="recojo">Recojo en tienda</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="delivery"
+                name="entrega" (change)="entrega='delivery'" [checked]="entrega==='delivery'">
+            <label class="form-check-label blanco" for="delivery">Entrega por delivery</label>
+          </div>
+        </div>
+
+        <!-- Formulario delivery -->
+        <form class="mt-3" *ngIf="entrega==='delivery'">
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label blanco">Nombre completo</label>
+              <input type="text" class="form-control" placeholder="Ej: James Quispe">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label blanco">Teléfono</label>
+              <input type="text" class="form-control" placeholder="999999999">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label blanco">Dirección</label>
+              <input type="text" class="form-control" placeholder="Calle, número, referencia">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label blanco">Ciudad</label>
+              <input type="text" class="form-control" placeholder="Ciudad">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label blanco">Provincia</label>
+              <input type="text" class="form-control" placeholder="Provincia">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Métodos de pago -->
+      <div>
+        <h6 class="fw-bold blanco">Selecciona tu método de pago</h6>
+
+        <div class="list-group">
+          <label class="list-group-item">
+            <input class="form-check-input me-2" type="radio" name="pago" value="credito"
+                   (change)="pago='credito'"> Tarjeta de crédito
+          </label>
+
+          <label class="list-group-item">
+            <input class="form-check-input me-2" type="radio" name="pago" value="debito"
+                   (change)="pago='debito'"> Tarjeta de débito
+          </label>
+
+          <label class="list-group-item">
+            <input class="form-check-input me-2" type="radio" name="pago" value="billeteras"
+                   (change)="pago='billeteras'"> Billeteras digitales
+          </label>
+
+          <label class="list-group-item">
+            <input class="form-check-input me-2" type="radio" name="pago" value="efectivo"
+                   (change)="pago='efectivo'"> PagoEfectivo
+          </label>
+        </div>
+
+        <!-- Formulario de tarjeta -->
+        <form class="mt-3" *ngIf="pago==='credito' || pago==='debito'">
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label blanco">Número de tarjeta</label>
+              <input type="text" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX">
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label blanco">Vencimiento</label>
+              <input type="text" class="form-control" placeholder="MM/AA">
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label blanco">CVV</label>
+              <input type="text" class="form-control" placeholder="123">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label blanco">Nombre del titular</label>
+              <input type="text" class="form-control" placeholder="Nombre como figura en la tarjeta">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Resumen compra -->
+    <div class="col-lg-4 mt-4 mt-lg-0">
+      <div class="resumen-compra shadow-sm">
+        <h5 class="fw-bold text-dark">Resumen de compra</h5>
+
+        <div class="d-flex justify-content-between mt-3 text-dark">
+          <span>Productos</span>
+          <span>S/ 1,496.00</span>
+        </div>
+
+        <div class="d-flex justify-content-between text-dark">
+          <span>Gastos de entrega</span>
+          <span>S/ 30.90</span>
+        </div>
+
+        <hr>
+
+        <div class="d-flex justify-content-between fw-bold fs-5 text-dark">
+          <span>Total</span>
+          <span>S/ 1,536.90</span>
+        </div>
+
+        <button class="btn btn-danger w-100 mt-3">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

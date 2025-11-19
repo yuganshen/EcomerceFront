@@ -1,38 +1,152 @@
-/* NAVBAR BASE */
-.navbar {
-  width: 100%;
+/* ============================
+   NAVBAR BASE
+============================ */
+.nav {
   background: #111;
   color: white;
-  padding: 10px 0;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
+  position: relative;
+  z-index: 500;
 }
 
-.navbar-container {
-  width: 95%;
+.nav-container {
+  max-width: 1200px;
   margin: auto;
+  padding: 12px 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
-.navbar-brand {
-  font-size: 20px;
+/* Logo */
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
   color: white;
   text-decoration: none;
 }
 
-/* MENÚ HAMBURGUESA (solo móvil) */
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
+/* ============================
+   MENU DESKTOP
+============================ */
+.menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu a {
   color: white;
-  font-size: 26px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.menu a:hover {
+  color: #ff5858;
+}
+
+/* ============================
+   DROPDOWN
+============================ */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-link {
   cursor: pointer;
 }
 
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #222;
+  width: 180px;
+  border-radius: 6px;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.25s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  padding: 8px 16px;
+}
+
+.dropdown-menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  color: #ff5252;
+}
+
+.dropdown-menu .header {
+  font-size: 0.9rem;
+  color: #aaa;
+  padding-left: 16px;
+}
+
+.logout {
+  color: #ff4d4d !important;
+}
+
+/* ============================
+   MOBILE RESPONSIVE
+============================ */
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    flex-direction: column;
+    background: #111;
+    padding: 20px 15px;
+    border-left: 1px solid #444;
+    border-bottom: 1px solid #444;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s ease;
+  }
+
+  .menu.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    transform: translateY(0);
+  }
+}
 /* LINKS */
 .navbar-links {
   display: flex;
@@ -49,83 +163,14 @@
   color: #ddd;
 }
 
-/* DROPDOWN */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-btn {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 8px 10px;
-}
-
-/* Por defecto está oculto */
-.dropdown-menu {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  top: 35px;
-  right: 0;
-  background: #222;
-  border-radius: 6px;
-  padding: 10px;
-  min-width: 160px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.3);
-  transition: all 0.2s ease-in-out;
-}
-
-/* Al pasar el mouse por el contenedor */
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Items */
-.dropdown-item {
-  display: block;
-  z-index: 99999;
-  padding: 8px;
-  color: white;
-  text-decoration: none;
-}
-
-.dropdown-item:hover {
-  background: #333;
-}
-
-.logout {
-  color: #ff6b6b;
-}
-
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .navbar-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: #111;
-    padding: 10px 0;
-    margin-top: 10px;
-  }
-
-  .navbar-links.open {
-    display: flex;
-  }
-}
 /* Contenedor principal */
 .tabs-container {
   display: flex;
+  justify-content: center;
   gap: 10px;
   position: relative;
-  margin-top: 70px; /* Ajusta según tu navbar */
+  margin-top: 15px; /* Ajusta según tu navbar */
+  width: 100%;  
 }
 
 /* Cada tab */
