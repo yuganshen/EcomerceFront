@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <header>Gestión de Productos</header>
+
+  <div class="container-box">
+
+    <!-- Inputs -->
+    <input 
+      [(ngModel)]="productName" 
+      placeholder="Nombre del producto"
+      type="text"
+    />
+
+    <input 
+      [(ngModel)]="productPrice" 
+      type="number" 
+      placeholder="Precio"
+    />
+
+    <button (click)="addProduct()">Agregar</button>
+
+    <!-- Tabla -->
+    <table *ngIf="products.length > 0; else noData">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let p of products; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ p.name }}</td>
+          <td>${{ p.price }}</td>
+          <td class="actions">
+            <button (click)="editProduct(i)">Editar</button>
+            <button (click)="deleteProduct(i)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Cuando no hay productos -->
+    <ng-template #noData>
+      <p style="margin-top: 1rem; color: #ccc;">No hay productos registrados.</p>
+    </ng-template>
+
+  </div>
+</div>
