@@ -223,3 +223,7 @@
 .tab-content a:hover {
   text-decoration: underline;
 }
+
+hr{
+  color: #fff;
+}
