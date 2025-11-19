@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarAdminComponent } from '../../componentes/navbaradmin/navbaradmin.component';
+
 
 interface Pedido {
   id: number;
@@ -12,7 +14,7 @@ interface Pedido {
 @Component({
   selector: 'app-gestion-pedidos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,NavbarAdminComponent],
   templateUrl: './gestionpedidos.component.html',
   styleUrls: ['./gestionpedidos.component.css']
 })
