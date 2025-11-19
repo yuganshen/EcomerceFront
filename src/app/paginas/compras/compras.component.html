@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+    <h3 class="blanco">Compras realizadas</h3>
+    <p class="mb-4 blanco">Verifica las compras que realizaste con el seguimiento que ofrecemos</p>
+
+    <form class="mb-4">
+        <input type="text" placeholder="Buscar por producto" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Tarjeta 1 -->
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.A2OBoNvRq4W41DGTBDpH2wHaGJ?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Producto" class="producto-img me-3">
+                <div>
+                    <h5 class="mb-1">Monitor Gamer Asus VG13241</h5>
+                    <p class="mb-0 text-muted">Panel IPS, QHD, 144Hz</p>
+                    <p class="mb-0 text-muted">S/100.5</p>
+                    <small class="text-muted">Fecha: 13 de octubre de 2025</small>
+                </div>
+            </div>
+            <div class="text-end">
+                <p class="estado-pendiente mb-2">Recojo pendiente</p>
+                <a routerLink="/detallecompra" class="btn btn-outline-secondary btn-sm">Ver detalle</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta 2 -->
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.0spFurFEnARv4Vrr5YKCwwHaEu?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Producto" class="producto-img me-3">
+                <div>
+                    <h5 class="mb-1">Teclado mecánico Redragon Kumara</h5>
+                    <p class="mb-0 text-muted">Switch Red, RGB</p>
+                    <p class="mb-0 text-muted">S/106</p>
+                    <small class="text-muted">Fecha: 2 de octubre de 2025</small>
+                </div>
+            </div>
+            <div class="text-end">
+                <p class="estado-completado mb-2">Entregado</p>
+                <a routerLink="/detallecompra" class="btn btn-outline-secondary btn-sm">Ver detalle</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta 3 -->
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.ORA9KJIlVESd4G90JnwCTQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Producto" class="producto-img me-3">
+                <div>
+                    <h5 class="mb-1">Mouse Logitech G502 HERO</h5>
+                    <p class="mb-0 text-muted">Sensor 25K DPI, 11 botones</p>
+                    <p class="mb-0 text-muted">S/80.6</p>
+                    <small class="text-muted">Fecha: 28 de septiembre de 2025</small>
+                </div>
+            </div>
+            <div class="text-end">
+                <p class="estado-completado mb-2">Entregado</p>
+                <a routerLink="/detallecompra" class="btn btn-outline-secondary btn-sm">Ver detalle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
