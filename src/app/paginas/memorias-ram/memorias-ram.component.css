@@ -1,0 +1,65 @@
+body {
+  background: linear-gradient(135deg, #0f0f1f, #1a082d, #000);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 30px rgba(186, 85, 255, 0.8),
+              0 0 60px rgba(138, 43, 226, 0.6);
+  transform: scale(1.05) rotate3d(1, 1, 0, 5deg);
+  transition: all 0.4s ease;
+}
+
+.price-gradient {
+  background: linear-gradient(90deg, #a855f7, #ec4899, #9333ea, #a855f7);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.offer-badge {
+  position: absolute;
+  top: 10px;
+  right: -20px;
+  transform: rotate(15deg);
+  background: linear-gradient(to right, #ff0080, #7928ca);
+  padding: 6px 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 8px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: rotate(15deg) scale(1); }
+  50% { opacity: 0.7; transform: rotate(15deg) scale(1.1); }
+}
+
+.btn-neon {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+  box-shadow: 0 0 20px #9333ea, 0 0 40px #a855f7;
+  transform: scale(1.05);
+}
