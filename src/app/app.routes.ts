@@ -12,6 +12,7 @@ import { ComprasComponent } from './paginas/compras/compras.component';
 import { DetallecompraComponent } from './paginas/detallecompra/detallecompra.component';
 import { PagoComponent } from './paginas/pago/pago.component';
 import { GestionProductosComponent } from './paginas/gestionproductos/gestionproductos.component';
+import { NavbarAdminComponent } from './componentes/navbaradmin/navbaradmin.component';
 
 export const routes: Routes = [
   { path: '', component: InicioComponent }, // página principal
@@ -26,5 +27,7 @@ export const routes: Routes = [
   { path: 'compras', component: ComprasComponent },
   { path: 'detallecompra', component: DetallecompraComponent },
   { path: 'pago', component: PagoComponent },
-  { path: 'gestionproductos', component: GestionProductosComponent }
+  { path: 'gestionproductos', component: GestionProductosComponent },
+  { path: 'navbaradmin', component: NavbarAdminComponent }
+  
 ];
