@@ -26,8 +26,7 @@ export class GestionProductosComponent {
   saveProducts() {
     localStorage.setItem('products', JSON.stringify(this.products));
   }
-
-  addProduct() {
+addProduct() {
     if (!this.productName || !this.productPrice) {
       alert('Completa todos los campos');
       return;
@@ -61,12 +60,12 @@ export class GestionProductosComponent {
         price: Number(newPrice),
       };
 
-      this.saveProducts();
+       this.saveProducts();
     }
   }
 
   deleteProduct(index: number) {
     this.products.splice(index, 1);
     this.saveProducts();
-  }
+  }
 }

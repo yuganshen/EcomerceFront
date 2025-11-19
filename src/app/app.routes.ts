@@ -19,12 +19,12 @@ export const routes: Routes = [
   { path: 'memorias', component: MemoriasRamComponent },
   { path: 'procesadores', component: ProcesadoresComponent },
   { path: 'gestionpedidos', component: GestionPedidosComponent },
-  { path: 'gestionproductos', component: GestionProductosComponent },
   { path: 'gestionusuarios', component: GestionUsuariosComponent },
   { path: 'inicioadmin', component: InicioAdminComponent },
   { path: 'login', component: LoginComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'compras', component: ComprasComponent },
   { path: 'detallecompra', component: DetallecompraComponent },
-  { path: 'pago', component: PagoComponent }
+  { path: 'pago', component: PagoComponent },
+  { path: 'gestionproductos', component: GestionProductosComponent }
 ];
