@@ -1,53 +1,41 @@
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top">
-  <div class="container-fluid">
+<nav class="navbar">
+  <div class="navbar-container">
+
+    <!-- Logo -->
     <a class="navbar-brand" routerLink="/">🕹️ GamingStore</a>
 
-    <div class="collapse navbar-collapse justify-content-end">
-      <ul class="navbar-nav">
+    <!-- Botón hamburguesa -->
+    <button class="menu-toggle" (click)="toggleMenu()">
+      ☰
+    </button>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/inicio">Inicio</a>
-        </li>
+    <!-- Links -->
+    <div class="navbar-links" [class.open]="menuOpen">
 
-        <!-- Dropdown usuario -->
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="userDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Yo
-          </a>
+      <a routerLink="/inicio" class="nav-link">Inicio</a>
 
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-            <li><h6 class="dropdown-header text-center">¡Bienvenido!</h6></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" routerLink="/perfil">Mi perfil</a></li>
-            <li><a class="dropdown-item" routerLink="/compras">Historial</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item text-danger" href="#" (click)="logout()">
-                Cerrar sesión
-              </a>
-            </li>
-          </ul>
-        </li>
+      <!-- Dropdown Usuario -->
+        <div class="dropdown">
+        <button class="dropdown-btn">
+          Yo ▾
+        </button>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/catalogo">Catálogo</a>
-        </li>
+        <div class="dropdown-menu">
+          <h6 class="dropdown-header">¡Bienvenido!</h6>
+          <hr />
+          <a routerLink="/perfil" class="dropdown-item">Mi Perfil</a>
+          <a routerLink="/compras" class="dropdown-item">Historial</a>
+          <hr />
+          <a class="dropdown-item logout" (click)="logout()">Cerrar sesión</a>
+        </div>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/carrito">
-            <i class="bi bi-cart"></i> Carrito (2)
-          </a>
-        </li>
+      <a routerLink="/catalogo" class="nav-link">Catálogo</a>
 
-      </ul>
+      <a routerLink="/carrito" class="nav-link">
+        🛒 Carrito (2)
+      </a>
+
     </div>
   </div>
 </nav>
@@ -55,85 +43,93 @@
 <!-- CONTENEDOR DE PESTAÑAS -->
 <div class="tabs-container">
 
-  <!-- Botones de pestañas -->
-  <div class="tabs">
-    <button class="tab-button blanco" (click)="selectTab('laptops')">Laptops</button>
-    <button class="tab-button blanco" (click)="selectTab('computadoras')">Computadoras</button>
-    <button class="tab-button blanco" (click)="selectTab('zona-gamer')">Zona Gamer</button>
-    <button class="tab-button blanco" (click)="selectTab('partes-pc')">Partes de PC</button>
-    <button class="tab-button blanco" (click)="selectTab('monitores')">Monitores y más</button>
-    <button class="tab-button blanco" (click)="selectTab('impresoras')">Impresoras</button>
+  <!-- Pestaña: Laptops -->
+  <div class="tab">
+    <button class="tab-button">Laptops</button>
+
+    <div class="tab-content">
+      <h5>Laptops</h5>
+      <a href="#">Asus</a>
+      <a href="#">HP</a>
+      <a href="#">Lenovo</a>
+      <a href="#">Dell</a>
+
+      <h5 class="mt-3">Laptops Gamer</h5>
+      <a href="#">Asus</a>
+      <a href="#">HP</a>
+      <a href="#">Lenovo</a>
+      <a href="#">Dell</a>
+    </div>
   </div>
 
-  <!-- Laptops -->
-  <div class="tab-content-custom" *ngIf="activeTab === 'laptops'">
-    <h5 class="w-100 fw-bold">Laptops</h5>
-    <a href="#">Asus</a>
-    <a href="#">HP</a>
-    <a href="#">Lenovo</a>
-    <a href="#">Dell</a>
+  <!-- Pestaña: Computadoras -->
+  <div class="tab">
+    <button class="tab-button">Computadoras</button>
 
-    <h5 class="w-100 fw-bold mt-3">Laptops Gamer</h5>
-    <a href="#">Asus</a>
-    <a href="#">HP</a>
-    <a href="#">Lenovo</a>
-    <a href="#">Dell</a>
+    <div class="tab-content">
+      <h5>Hogar & Oficina</h5>
+      <a href="#">AMD Series</a>
+      <a href="#">Intel Series</a>
+
+      <h5 class="mt-3">PC's Gamers</h5>
+      <a href="#">Línea baja</a>
+      <a href="#">Línea ultra</a>
+      <a href="#">Línea extrema</a>
+    </div>
   </div>
 
-  <!-- Computadoras -->
-  <div class="tab-content-custom" *ngIf="activeTab === 'computadoras'">
-    <h5 class="w-100 fw-bold">Hogar & Oficina</h5>
-    <a href="#">AMD Series</a>
-    <a href="#">Intel Series</a>
+  <div class="tab">
+    <button class="tab-button">Zona-Gamer</button>
 
-    <h5 class="w-100 fw-bold mt-3">PC'S Gamers</h5>
-    <a href="#">Línea baja</a>
-    <a href="#">Línea ultra</a>
-    <a href="#">Línea extrema</a>
+    <div class="tab-content">
+      <a href="#">Teclado Gamer</a>
+      <a href="#">Mouse Gamer</a>
+      <a href="#">Audífonos Gamer</a>
+      <a href="#">Sillas Gamer</a>
+      <a href="#">Pantallas Gamer</a>
+    </div>
   </div>
 
-  <!-- Zona Gamer -->
-  <div class="tab-content-custom" *ngIf="activeTab === 'zona-gamer'">
-    <h5 class="w-100 fw-bold">Zona Gamer</h5>
-    <a href="#">Teclado Gamer</a>
-    <a href="#">Mouse Gamer</a>
-    <a href="#">Audífonos Gamer</a>
-    <a href="#">Sillas Gamer</a>
-    <a href="#">Pantallas Gamer</a>
+  <div class="tab">
+    <button class="tab-button">Partes de Pc</button>
+
+    <div class="tab-content">
+      <a href="#">Tarjetas de video</a>
+      <a href="#">Discos</a>
+      <a href="#">Procesadores</a>
+      <a href="#">Memoria RAM</a>
+      <a href="#">Fuentes de poder</a>
+      <a href="#">Cooler</a>  
+    </div>
   </div>
 
-  <!-- Partes de PC -->
-  <div class="tab-content-custom" *ngIf="activeTab === 'partes-pc'">
-    <h5 class="w-100 fw-bold">Partes de PC</h5>
-    <a href="#">Tarjetas de video</a>
-    <a href="#">Discos</a>
-    <a href="#">Procesadores</a>
-    <a href="#">Memoria RAM</a>
-    <a href="#">Fuentes de poder</a>
-    <a href="#">Cooler</a>
+  <div class="tab">
+    <button class="tab-button">Monitores</button>
+
+    <div class="tab-content">
+       <h5>Monitores</h5>
+      <a href="#">LG</a>
+      <a href="#">Samsung</a>
+      <a href="#">Asus</a>
+      <a href="#">Teros</a>
+
+      <h5>Proyectores</h5>
+      <a href="#">View Sonic</a>
+      <a href="#">Epson</a>
+      <a href="#">Havit</a>
+    </div>
   </div>
 
-  <!-- Monitores -->
-  <div class="tab-content-custom" *ngIf="activeTab === 'monitores'">
-    <h5 class="w-100 fw-bold">Monitores</h5>
-    <a href="#">LG</a>
-    <a href="#">Samsung</a>
-    <a href="#">Asus</a>
-    <a href="#">Teros</a>
+  <div class="tab">
+    <button class="tab-button">Impresoras</button>
 
-    <h5 class="w-100 fw-bold mt-3">Proyectores</h5>
-    <a href="#">View Sonic</a>
-    <a href="#">Epson</a>
-    <a href="#">Havit</a>
+    <div class="tab-content">
+      <a href="#">Brother</a>
+      <a href="#">Epson</a>
+      <a href="#">Canon</a>
+      <a href="#">HP</a>
+    </div>
   </div>
-
-  <!-- Impresoras -->
-  <div class="tab-content-custom" *ngIf="activeTab === 'impresoras'">
-    <h5 class="w-100 fw-bold">Impresoras</h5>
-    <a href="#">Brother</a>
-    <a href="#">Epson</a>
-    <a href="#">Canon</a>
-    <a href="#">HP</a>
-  </div>
-
+  <!-- Repite la estructura para las demás -->
 </div>
+
