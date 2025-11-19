@@ -1,1 +1,33 @@
-<p>gestionusuarios works!</p>
+<div class="page-title">Gestión de Usuarios</div>
+
+<div class="container">
+  <h2>Lista de Usuarios</h2>
+
+  <table class="table table-dark table-striped text-center mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{ u.id }}</td>
+        <td>{{ u.name }}</td>
+        <td>{{ u.role }}</td>
+        <td>{{ u.active ? 'Activo' : 'Inactivo' }}</td>
+        <td>
+          <button class="btn btn-sm"
+                  [ngClass]="u.active ? 'btn-danger' : 'btn-success'"
+                  (click)="toggleUser(u.id)">
+            {{ u.active ? 'Desactivar' : 'Activar' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
