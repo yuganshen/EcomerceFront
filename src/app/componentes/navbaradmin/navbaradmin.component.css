@@ -1,0 +1,150 @@
+/* ============================
+   NAVBAR BASE
+============================ */
+.nav {
+  background: #111;
+  color: white;
+  position: relative;
+  z-index: 500;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* ============================
+   MENU DESKTOP
+============================ */
+.menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.menu a:hover {
+  color: #ff5858;
+}
+
+/* ============================
+   DROPDOWN
+============================ */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-link {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #222;
+  width: 200px;
+  border-radius: 6px;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.25s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  color: #ff5252;
+}
+
+.header {
+  font-size: 0.9rem;
+  color: #aaa;
+  padding-left: 16px;
+}
+
+.logout {
+  color: #ff4d4d !important;
+}
+
+/* ============================
+   MOBILE RESPONSIVE
+============================ */
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    flex-direction: column;
+    background: #111;
+    padding: 20px 15px;
+    border-left: 1px solid #444;
+    border-bottom: 1px solid #444;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s ease;
+  }
+
+  .menu.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+  }
+}
+
+hr {
+  color: #fff;
+}

@@ -1,0 +1,40 @@
+<nav class="nav">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <a routerLink="/inicioadmin" class="logo">🕹️ AdminStore</a>
+
+    <!-- Botón hamburguesa -->
+    <button class="hamburger" (click)="toggleMobile()">
+      ☰
+    </button>
+
+    <!-- Menú -->
+    <ul class="menu" [class.open]="mobileOpen">
+
+      <!-- Dropdown Admin -->
+      <li class="dropdown" (click)="toggleUserMenu()">
+
+        <a class="nav-link dropdown-link">Admin</a>
+
+        <ul class="dropdown-menu" [class.show]="userOpen">
+          <li class="header">Panel del Administrador</li>
+          <hr>
+
+          <li><a routerLink="/perfil" class="dropdown-item">Mi Perfil</a></li>
+          <li><a routerLink="/gestionusuarios" class="dropdown-item">Historial</a></li>
+          <li><a routerLink="/gestionpedidos" class="dropdown-item">Pedidos</a></li>
+          <li><a routerLink="/gestionusuarios" class="dropdown-item">Usuarios</a></li>
+          <li><a routerLink="/gestionproductos" class="dropdown-item">Productos</a></li>
+
+          <hr>
+          <li><a routerLink="/login" class="dropdown-item logout">Cerrar Sesión</a></li>
+        </ul>
+
+        
+
+      </li>
+
+    </ul>
+  </div>
+</nav>
