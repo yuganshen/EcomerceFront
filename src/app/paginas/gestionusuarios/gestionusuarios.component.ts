@@ -1,12 +1,31 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+interface Usuario {
+  id: number;
+  name: string;
+  role: string;
+  active: boolean;
+}
 
 @Component({
-  selector: 'app-gestionusuarios',
+  selector: 'app-gestion-usuarios',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './gestionusuarios.component.html',
-  styleUrl: './gestionusuarios.component.css'
+  styleUrls: ['./gestionusuarios.component.css']
 })
-export class GestionusuariosComponent {
+export class GestionUsuariosComponent {
+  users: Usuario[] = [
+    { id: 1, name: 'Carlos', role: 'Admin', active: true },
+    { id: 2, name: 'Lucía', role: 'Cliente', active: false }
+  ];
 
+  toggleUser(id: number) {
+    const user = this.users.find(u => u.id === id);
+    if (user) {
+      user.active = !user.active;
+    }
+  }
 }

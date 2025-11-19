@@ -1,0 +1,40 @@
+<div class="page-title">Gestión de Pedidos</div>
+
+<div class="container">
+
+  <h2>Lista de Pedidos</h2>
+
+  <table class="table table-dark table-striped text-center mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Producto</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let o of orders">
+        <td>{{ o.id }}</td>
+        <td>{{ o.client }}</td>
+        <td>{{ o.product }}</td>
+        <td>{{ o.status }}</td>
+
+        <td>
+          <button class="btn btn-warning btn-sm me-2"
+                  (click)="changeOrderStatus(o.id)">
+            Cambiar Estado
+          </button>
+
+          <button class="btn btn-info btn-sm"
+                  (click)="contactClient(o.client)">
+            Contactar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

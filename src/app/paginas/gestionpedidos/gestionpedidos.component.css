@@ -14,7 +14,7 @@
   background: rgba(255, 255, 255, 0.05);
   padding: 25px;
   border-radius: 15px;
-  max-width: 800px;
+  max-width: 900px;
   box-shadow: 0 0 15px rgba(154, 77, 255, 0.2);
 }
 
@@ -29,22 +29,22 @@ button {
   transition: 0.3s;
 }
 
-.btn-danger {
-  background-color: #e53935;
+.btn-warning {
+  background-color: #ff9800;
   color: #fff;
   border: none;
 }
 
-.btn-danger:hover {
-  background-color: #b71c1c;
+.btn-warning:hover {
+  background-color: #e68900;
 }
 
-.btn-success {
-  background-color: #43a047;
+.btn-info {
+  background-color: #2196f3;
   color: #fff;
   border: none;
 }
 
-.btn-success:hover {
-  background-color: #2e7d32;
+.btn-info:hover {
+  background-color: #1976d2;
 }
