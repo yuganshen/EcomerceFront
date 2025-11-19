@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarAdminComponent } from '../../componentes/navbaradmin/navbaradmin.component';
+
 
 @Component({
   selector: 'app-gestion-productos',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Necesario para usar ngModel
+  imports: [CommonModule, FormsModule, NavbarAdminComponent], // Necesario para usar ngModel
   templateUrl: './gestionproductos.component.html',
   styleUrls: ['./gestionproductos.component.css'],
 })
