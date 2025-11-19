@@ -1,0 +1,44 @@
+.card-producto img {
+      width: 100px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .resumen-compra {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+    } /* 🔹 ← esta llave faltaba */
+
+    body {
+      background: linear-gradient(135deg, #0f0f1f, #1a082d, #000);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    main {
+      flex: 1; /* empuja el footer hacia abajo */
+    }
+
+    footer {
+      margin-top: auto; /* fuerza el footer al fondo */
+    }
+      .blanco{
+        	color: #fff;
+        }
