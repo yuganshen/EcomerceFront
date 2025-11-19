@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+ <div >
+        <div class="container mt-5">
+            <div class="p-4 mx-auto" style="max-width: 900px;">
+                <h4 class="blanco">Mi perfil</h4>
+                <p class="mb-4 blanco">Administra y actualiza tu información personal de forma sencilla.</p>
+
+                <div class="card shadow p-4">
+                    <!-- Añadí method y action como ejemplo -->
+                    <form method="post" action="#" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                    placeholder="Ingresa tu nombre" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido"
+                                    placeholder="Ingresa tu apellido" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="correo" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correo" name="correo"
+                                    placeholder="ejemplo@correo.com" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="dni" class="form-label">Documento de identidad</label>
+                                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ej: 12345678"
+                                    maxlength="12" inputmode="numeric" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="celular" class="form-label">Celular</label>
+                                <input type="tel" class="form-control" id="celular" name="celular"
+                                    placeholder="999-999-999" pattern="[0-9]{9}" inputmode="tel" required>
+                                <div class="form-text">Formato: 9 dígitos (sin espacios ni guiones)</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="fecha_nac" class="form-label">Fecha de nacimiento</label>
+                                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terminos" name="terminos" required>
+                            <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-danger">Editar información</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+  <app-footer></app-footer>

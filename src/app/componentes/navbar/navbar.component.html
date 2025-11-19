@@ -1,45 +1,43 @@
-<nav class="navbar">
-  <div class="navbar-container">
+<nav class="nav">
+  <div class="nav-container">
 
     <!-- Logo -->
-    <a class="navbar-brand" routerLink="/">🕹️ GamingStore</a>
+    <a routerLink="/" class="logo">🕹️ GamingStore</a>
 
     <!-- Botón hamburguesa -->
-    <button class="menu-toggle" (click)="toggleMenu()">
+    <button class="hamburger" (click)="toggleMobile()">
       ☰
     </button>
 
-    <!-- Links -->
-    <div class="navbar-links" [class.open]="menuOpen">
+    <!-- Menú principal -->
+    <ul class="menu" [class.open]="mobileOpen">
 
-      <a routerLink="/inicio" class="nav-link">Inicio</a>
+      <!-- Dropdown Yo -->
+      <li class="dropdown" (click)="toggleUserMenu()" #userMenu>
 
-      <!-- Dropdown Usuario -->
-        <div class="dropdown">
-        <button class="dropdown-btn">
-          Yo ▾
-        </button>
+  <a class="dropdown-link">Yo ▾</a>
 
-        <div class="dropdown-menu">
-          <h6 class="dropdown-header">¡Bienvenido!</h6>
-          <hr />
-          <a routerLink="/perfil" class="dropdown-item">Mi Perfil</a>
-          <a routerLink="/compras" class="dropdown-item">Historial</a>
-          <hr />
-          <a class="dropdown-item logout" (click)="logout()">Cerrar sesión</a>
-        </div>
-      </div>
+  <ul class="dropdown-menu" [class.show]="userOpen">
+    <li class="header">¡Bienvenido!</li>
+    <hr>
+    <li><a routerLink="/perfil">Mi Perfil</a></li>
+    <li><a routerLink="/compras">Historial</a></li>
+    <hr>
+    <li><a class="logout" (click)="logout()">Cerrar sesión</a></li>
+  </ul>
 
-      <a routerLink="/catalogo" class="nav-link">Catálogo</a>
+</li>
 
-      <a routerLink="/carrito" class="nav-link">
-        🛒 Carrito (2)
-      </a>
 
-    </div>
+      <li><a routerLink="/">Catálogo</a></li>
+
+      <!-- Carrito -->
+      <li>
+        <a routerLink="/carrito">🛒 Carrito (2)</a>
+      </li>
+    </ul>
   </div>
 </nav>
-
 <!-- CONTENEDOR DE PESTAÑAS -->
 <div class="tabs-container">
 

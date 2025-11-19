@@ -1,54 +1,48 @@
-/*import { Component } from '@angular/core';
+import { Component , ElementRef, HostListener, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-imports: [CommonModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
-})
-
-//para manejar los desplgables
-export class NavbarComponent {
-  //para el logout que aun no fun
-  logout() {
-  console.log("Usuario logout");
-}
-activeTab: string = '';
-
-selectTab(tab: string) {
-  this.activeTab = tab;
-}
-
-}*/
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
-@Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
 
-  menuOpen = false;
-  dropdownOpen = false;
-  activeTab: string | null = null;
+mobileOpen = false;
+userHover = false;
+productsHover = false;
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+toggleMobile() {
+  this.mobileOpen = !this.mobileOpen;
+}
+
+hoverUser(state: boolean) {
+  this.userHover = state;
+}
+
+hoverProducts(state: boolean) {
+  this.productsHover = state;
+}
+
+userOpen = false;
+
+  @ViewChild('userMenu') userMenu!: ElementRef;
+
+  toggleUserMenu() {
+    this.userOpen = !this.userOpen;
   }
-  selectTab(tab: string) {
-    this.activeTab = tab;
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if (this.userMenu && !this.userMenu.nativeElement.contains(event.target)) {
+      this.userOpen = false;
+    }
   }
 
   logout() {
-    console.log('Cerrando sesión...');
+    console.log("Cerrar sesión");
   }
 }
-
