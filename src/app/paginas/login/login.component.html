@@ -9,65 +9,84 @@
     
     <!-- 👤 Avatar flotante -->
     <div class="flex justify-center">
-      <img src="https://i.ibb.co/ypBk6Lr/avatar.png" alt="Avatar" 
-           class="avatar w-24 h-24 rounded-full border-4 border-purple-500 shadow-lg">
+      <div class="w-24 h-24 rounded-full border-4 border-purple-500 shadow-lg flex items-center justify-center bg-purple-600/50">
+        <span class="text-4xl">🎮</span>
+      </div>
     </div>
 
     <!-- Título -->
     <h2 class="text-3xl font-bold text-center mt-4 mb-6">Bienvenido a <span class="text-purple-400">GameCenter</span></h2>
 
+    <!-- Mensaje de error -->
+    <div *ngIf="mensajeError" class="bg-red-500/20 border border-red-500 rounded-lg p-4 mb-4">
+      <p class="text-red-300 text-center">❌ {{ mensajeError }}</p>
+    </div>
+
     <!-- Formulario -->
-    <div  class="space-y-4">
-      <!-- Usuario -->
+    <form [formGroup]="formularioLogin" (ngSubmit)="login()" class="space-y-4">
+      
+      <!-- Email -->
       <div>
-        <label class="block text-sm text-gray-200 mb-2">Usuario:</label>
+        <label class="block text-sm text-gray-200 mb-2">Email:</label>
         <div class="relative">
-          <input type="text" placeholder="Ingresa su usuario" required
-            class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/20 border border-white/30 focus:ring-2 focus:ring-purple-400 focus:outline-none">
-          <i class="fa-solid fa-user absolute left-3 top-3 text-gray-300">👱</i>
+          <input 
+            type="email" 
+            formControlName="email"
+            placeholder="tu@email.com"
+            [class.is-invalid]="formularioLogin.get('email')?.touched && formularioLogin.get('email')?.invalid"
+            class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/20 border border-white/30 focus:ring-2 focus:ring-purple-400 focus:outline-none transition">
+          <i class="absolute left-3 top-3 text-gray-300">👤</i>
         </div>
+        <p *ngIf="formularioLogin.get('email')?.touched && formularioLogin.get('email')?.invalid" 
+           class="text-red-300 text-xs mt-1">
+          {{ obtenerMensajeError('email') }}
+        </p>
       </div>
 
       <!-- Contraseña -->
       <div>
         <label class="block text-sm text-gray-200 mb-2">Contraseña:</label>
         <div class="relative">
-          <input type="password" placeholder="Ingresa tu contraseña" required
-            class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/20 border border-white/30 focus:ring-2 focus:ring-purple-400 focus:outline-none">
-          <i class="fa-solid fa-lock absolute left-3 top-3 text-gray-300">🔒</i>
+          <input 
+            [type]="mostrarPassword ? 'text' : 'password'" 
+            formControlName="contraseña"
+            placeholder="Ingresa tu contraseña"
+            [class.is-invalid]="formularioLogin.get('contraseña')?.touched && formularioLogin.get('contraseña')?.invalid"
+            class="w-full pl-10 pr-10 py-2 rounded-lg bg-white/20 border border-white/30 focus:ring-2 focus:ring-purple-400 focus:outline-none transition">
+          <i class="absolute left-3 top-3 text-gray-300">🔒</i>
+          <button 
+            type="button"
+            (click)="alternarVisibilidad()"
+            class="absolute right-3 top-2 text-gray-300 hover:text-white transition border-0 bg-transparent">
+            {{ mostrarPassword ? '👁️' : '👁️‍🗨️' }}
+          </button>
         </div>
+        <p *ngIf="formularioLogin.get('contraseña')?.touched && formularioLogin.get('contraseña')?.invalid" 
+           class="text-red-300 text-xs mt-1">
+          {{ obtenerMensajeError('contraseña') }}
+        </p>
       </div>
 
-      <!-- Rol -->
-      <div>
-        <label class="block text-sm text-gray-200 mb-2">Rol:</label>
-        <div class="relative">
-          <select required
-            class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white focus:ring-2 focus:ring-purple-400 focus:outline-none appearance-none" name="opcion">
-            <option value="" disabled selected>Selecciona tu rol</option>
-            <option value="admin" class="text-black">Administrador</option>
-            <option value="usuario" class="text-black">Usuario</option>
-          </select>
-          <i class="fa-solid fa-user-gear absolute left-3 top-3 text-gray-300">📒</i>
-        </div>
-      </div>
-
-      <!-- Recuperar -->
+      <!-- Recuperar contraseña -->
       <div class="text-right">
         <a href="#" class="text-sm text-purple-300 hover:underline">¿Olvidaste tu contraseña?</a>
       </div>
 
       <!-- Botón LOGIN -->
-      <ul>
-        <li>
-          <a routerLink="/inicioadmin" class="btn-animate w-full py-2 rounded-lg text-white font-semibold text-center block">
-            LOGIN
-          </a>
-        </li>
-      </ul>
-    </div>
+      <button 
+        type="submit"
+        [disabled]="cargando || formularioLogin.invalid"
+        class="btn-animate w-full py-2 rounded-lg text-white font-semibold bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 disabled:cursor-not-allowed transition block">
+        {{ cargando ? 'Iniciando sesión...' : 'LOGIN' }}
+      </button>
+    </form>
 
-    <!-- Redes sociales -->
+    <!-- Link a registro -->
+    <div class="text-center mt-4">
+      <p class="text-gray-300">¿No tienes cuenta? 
+        <a routerLink="/registro" class="text-purple-300 hover:underline font-semibold">Regístrate aquí</a>
+      </p>
+    </div>
 
   </div>
 </div>

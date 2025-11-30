@@ -1,0 +1,79 @@
+/* Estilos del componente de registro */
+
+:host {
+  display: block;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Estilos para campos inválidos */
+.is-invalid {
+  border-color: rgb(239, 68, 68) !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Estilos para inputs */
+input {
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+/* Estilos para botones */
+button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(168, 85, 247, 0.5);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Estilos para mensajes de error */
+p.text-red-300 {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Estilos para mensajes de éxito */
+.bg-green-500\/20 {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .max-w-md {
+    max-width: 90vw;
+  }
+
+  .p-8 {
+    padding: 1.5rem;
+  }
+}
