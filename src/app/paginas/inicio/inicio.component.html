@@ -151,135 +151,45 @@
     </div>
   </section>
 
+    <!-- BUSCADOR Y FILTRO -->
+  <section class="max-w-7xl mx-auto p-6">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 ">
+      <label for="">BUSCAR PRODUCTOS:</label>
+      <select  class="px-5 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option>TODOS</option>
+        <option>Teclados</option>
+        <option>Ratones</option>
+        <option>Monitores</option>
+        <option>Laptops</option>
+        <option>Accesorios</option>
+      </select>
+    </div>
+  </section>
   <!-- TODOS LOS PRODUCTOS -->
   <section class="max-w-7xl mx-auto px-6 mb-16">
     <h2 class="text-4xl font-extrabold text-purple-300 mb-8 section-header">
       <i class="fas fa-th-large text-purple-500 mr-2"></i>Todos los Productos
     </h2>
 
+    <!--DIV PADREEEEE-->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
       <!-- Aquí van todas tus cards, tal cual como las copiaste -->
-       <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <div class="offer-badge">-10%</div>
-        <img src="https://assets.razerzone.com/eeimages/support/products/1612/1612_razerdeathadderv2.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-purple-600 px-2 py-1 rounded-full">Razer</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">Razer DeathAdder V2</h2>
-          <p class="text-gray-300 mt-2">Sensor óptico Focus+, switches mecánicos Razer.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.259.00</span>
+       <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow" *ngFor="let p of productos">
+       <!--<div class="offer-badge">-10%</div>-->
+        <img [src]="'http://localhost:8082/img/' + p.imagenPrincipal" class="w-full h-56 object-contain bg-black" alt="{{p.nombre}}">
+       <div class="p-6">
+          <span class="text-xs uppercase bg-purple-600 px-2 py-1 rounded-full">{{p.marca}}</span>
+          <h2 class="text-2xl font-bold text-purple-300 mt-3">{{p.nombre}}</h2>
+          <p class="text-gray-300 mt-2" style="height: 70px;">{{p.descripcion}}</p>
+          <span class="text-xl font-extrabold price-gradient">S/ .{{p.precio}}</span>
+          <div class="flex justify-between items-center mt-3">
             <button class="btn-neon" onclick="location.href='Detalle-producto.html?id=1'">Ver Detalles</button>
+            <button class="btn btn-success py-2" onclick="location.href='Detalle-producto.html?id=1'">Añadir producto</button>
           </div>
         </div>
       </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <img src="https://content.ibuypower.com/cdn-cgi/image/width=3840,format=auto,quality=75/https://content.ibuypower.com/Images/Components/26801/Logitech-G502-HERO-01-1200.png?v=752a592eaa12ba84bad5e4ff6fe3473a9bad5e62" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-blue-700 px-2 py-1 rounded-full">Logitech</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">G502 HERO</h2>
-          <p class="text-gray-300 mt-2">Sensor HERO 25K, peso ajustable y 11 botones programables.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.329.00</span>
-            <button class="btn-neon" onclick="location.href='Detalle-producto.html?id=2'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <div class="offer-badge">-5%</div>
-        <img src="https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Computer%20Accessories%20and%20Tablets%20Accessories/Images/260734_10_vynqje.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-green-600 px-2 py-1 rounded-full">HyperX</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">Pulsefire Surge</h2>
-          <p class="text-gray-300 mt-2">Iluminación RGB dinámica y precisión de 16000 DPI.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.299.90</span>
-            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=3'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <img src="https://res.cloudinary.com/riqra/image/upload/w_656,h_656,c_limit,q_auto,f_auto/v1739983851/sellers/ss-imports/products/ijkrz1ddvglbdtreqgwy.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-red-600 px-2 py-1 rounded-full">Redragon</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">EISA K686-RGB-PRO</h2>
-          <p class="text-gray-300 mt-2">Inalámbrico, RGB dinámico y diseño único estilo anime.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.399.00</span>
-            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=4'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <img src="https://assets.razerzone.com/press/blackwidow/razer-blackwidow-chroma-v2.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-orange-500 px-2 py-1 rounded-full">Razer</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">Blackwidow V3</h2>
-          <p class="text-gray-300 mt-2">Switches mecánicos, estructura de aluminio y full RGB.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.349.00</span>
-            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=5'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <div class="offer-badge">-8%</div>
-        <img src= "https://dojiw2m9tvv09.cloudfront.net/48881/product/X_g915-gallery-hero1167.png?106&time=1760105060" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-yellow-500 px-2 py-1 rounded-full text-black">Logitech</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">LIGHTSPEED G915 GAMING</h2>
-          <p class="text-gray-300 mt-2">Sofisticado diseño de incomparable belleza, resistencia y desempeño.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.249.00</span>
-            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=6'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <img src="https://dlcdnwebimgs.asus.com/files/media/6e89591d-8122-4509-8707-1b8e9b4cdde5/img/rog_delta.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-cyan-600 px-2 py-1 rounded-full">ASUS</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">ROG Delta Gaming</h2>
-          <p class="text-gray-300 mt-2">Auriculares para juegos RGB con Hi-Res ESS Quad-DAC.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.700.00</span>
-            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=7'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <img src="https://redragon.es/content/uploads/2021/04/ZEUS-B.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-pink-600 px-2 py-1 rounded-full">Redragon</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">Zeus X</h2>
-          <p class="text-gray-300 mt-2">Con retroiluminación RGB, un micrófono excepcional, construcción cómoda y robusta.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.250.00</span>
-            <a class="btn-neon" routerLink="/compras">Ver Detalles</a>
-          </div>
-        </div>
-      </div>
-        
-      <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow">
-        <div class="offer-badge">-12%</div>
-        <img src="https://resource.logitech.com/content/dam/gaming/en/products/g733/gallery/g733-lilac-gallery-1.png" class="w-full h-56 object-contain bg-black">
-        <div class="p-6">
-          <span class="text-xs uppercase bg-purple-500 px-2 py-1 rounded-full">Logitech</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">G733</h2>
-          <p class="text-gray-300 mt-2">Auriculares inalámbricos para juegos LIGHTSPEED con LIGHTSYNC RGB.</p>
-          <div class="flex justify-between items-center mt-5">
-            <span class="text-xl font-extrabold price-gradient">S/.300.00</span>
-            <button class="btn-neon" onclick="location.href='detalle-producto.html?id=9'">Ver Detalles</button>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </section>
 
