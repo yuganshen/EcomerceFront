@@ -1,6 +1,7 @@
-import { Component , ElementRef, HostListener, ViewChild} from '@angular/core';
+import { Component, OnInit , ElementRef, HostListener, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CarritoService } from '../../servicios/apiCarrito/api-carrito.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,17 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
+   cantidadItems: number = 0;
+constructor(private carritoService: CarritoService) {}
+
+  ngOnInit(): void {
+    // Suscribirse para actualizar la cantidad en tiempo real
+    this.carritoService.carrito$.subscribe(carrito => {
+      this.cantidadItems = carrito.cantidadTotal;
+    });
+  }
+
 
 mobileOpen = false;
 userHover = false;

@@ -30,9 +30,16 @@
 
       <li><a routerLink="/">Catálogo</a></li>
 
-      <!-- Carrito -->
-      <li>
-        <a routerLink="/carrito">🛒 Carrito (2)</a>
+      <!-- Carrito con badge -->
+      <li class="position-relative">
+        <a routerLink="/carrito" class="nav-link d-flex align-items-center">
+          🛒 Carrito
+          <span *ngIf="cantidadItems > 0" 
+                class="badge bg-danger rounded-pill ms-2"
+                style="font-size: 0.7rem; padding: 0.25em 0.5em;">
+            {{ cantidadItems }}
+          </span>
+        </a>
       </li>
     </ul>
   </div>

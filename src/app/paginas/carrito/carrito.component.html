@@ -1,111 +1,141 @@
 <nav><app-navbar></app-navbar></nav>
 <main>
   <div class="container py-4">
-    <h4 class="fw-bold mb-3 blanco">Mi carrito <span class="blanco">(3 productos)</span></h4>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="fw-bold blanco">
+        Mi carrito 
+        <span class="blanco">({{ carrito.cantidadTotal }} producto{{ carrito.cantidadTotal !== 1 ? 's' : '' }})</span>
+      </h4>
+      
+      <!-- Botón vaciar carrito -->
+      <button *ngIf="carrito.items.length > 0" 
+              class="btn btn-outline-danger btn-sm" 
+              (click)="vaciarCarrito()">
+        <i class="fas fa-trash"></i> Vaciar Carrito
+      </button>
+    </div>
 
-    <div class="row">
+    <!-- Mensaje si el carrito está vacío -->
+    <div *ngIf="carrito.items.length === 0" class="text-center py-5">
+      <div class="card shadow-sm p-5">
+        <i class="fas fa-shopping-cart fa-5x text-muted mb-3"></i>
+        <h5 class="text-muted">Tu carrito está vacío</h5>
+        <p class="text-muted">Agrega productos desde el catálogo</p>
+        <button class="btn btn-primary mt-3" (click)="continuarComprando()">
+          <i class="fas fa-shopping-bag"></i> Ir al Catálogo
+        </button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="carrito.items.length > 0">
       <!-- Lista de productos -->
       <div class="col-lg-8">
-        <!-- Producto -->
-        <div class="card mb-3 card-producto p-3 d-flex flex-row align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/img/telefono.jpeg" class="me-3" alt="Producto">
+        <div class="card mb-3 card-producto p-3 d-flex flex-row align-items-center justify-content-between"
+             *ngFor="let item of carrito.items">
+          <div class="d-flex align-items-center flex-grow-1">
+            <img [src]="'http://localhost:8082/img/' + item.imagenPrincipal" 
+                 class="me-3" 
+                 alt="{{item.nombre}}"
+                 style="width: 100px; height: 100px; object-fit: contain; border-radius: 8px;">
             <div>
-              <h6 class="fw-bold mb-1">Celular Motorola Edge 50 Fusion</h6>
-              <p class="mb-0 text-muted">8GB RAM, 256GB, 50MP + 13MP, 32MP frontal</p>
-              <a href="#" class="text-danger small">Eliminar</a>
+              <h6 class="fw-bold mb-1">{{ item.nombre }}</h6>
+              <p class="mb-0 text-muted small">{{ item.marca }}</p>
+              <p class="mb-1 text-muted" style="font-size: 0.85rem;">{{ item.descripcion | slice:0:50 }}...</p>
+              <p class="mb-0 text-muted small">Stock disponible: {{ item.stock }}</p>
+              <a href="#" 
+                 class="text-danger small" 
+                 (click)="eliminarProducto(item.idProducto); $event.preventDefault()">
+                <i class="fas fa-trash"></i> Eliminar
+              </a>
             </div>
           </div>
-          <div class="text-end">
+          
+          <div class="text-end" style="min-width: 150px;">
+            <p class="text-muted mb-2 small">Precio unitario: S/ {{ item.precio.toFixed(2) }}</p>
             <div class="d-flex align-items-center justify-content-end mb-2">
-              <button class="btn btn-outline-secondary btn-sm">−</button>
-              <span class="mx-2">1</span>
-              <button class="btn btn-outline-secondary btn-sm">+</button>
+              <button class="btn btn-outline-secondary btn-sm" 
+                      (click)="disminuirCantidad(item)">
+                −
+              </button>
+              <span class="mx-3 fw-bold">{{ item.cantidad }}</span>
+              <button class="btn btn-outline-secondary btn-sm" 
+                      (click)="aumentarCantidad(item)"
+                      [disabled]="item.cantidad >= item.stock">
+                +
+              </button>
             </div>
-            <p class="fw-bold mb-0 text-success">S/ 1,049.00</p>
-          </div>
-        </div>
-        
-         <div class="card mb-3 card-producto p-3 d-flex flex-row align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/img/mouse.jpg" class="me-3" alt="Producto">
-            <div>
-              <h6 class="fw-bold mb-1">Mouse TG4</h6>
-              <p class="mb-0 text-muted">12000 dpi, peso 50g</p>
-              <a href="#" class="text-danger small">Eliminar</a>
-            </div>
-          </div>
-          <div class="text-end">
-            <div class="d-flex align-items-center justify-content-end mb-2">
-              <button class="btn btn-outline-secondary btn-sm">−</button>
-              <span class="mx-2">1</span>
-              <button class="btn btn-outline-secondary btn-sm">+</button>
-            </div>
-            <p class="fw-bold mb-0 text-success">S/ 49.00</p>
-          </div>
-        </div>
-          <div class="card mb-3 card-producto p-3 d-flex flex-row align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/img/teclado.jpg" class="me-3" alt="Producto">
-            <div>
-              <h6 class="fw-bold mb-1">Teclado Redragon Kumara 552</h6>
-              <p class="mb-0 text-muted"> Color: Negro, RGB: SI, </p>
-              <a href="#" class="text-danger small">Eliminar</a>
-            </div>
-          </div>
-          <div class="text-end">
-            <div class="d-flex align-items-center justify-content-end mb-2">
-              <button class="btn btn-outline-secondary btn-sm">−</button>
-              <span class="mx-2">1</span>
-              <button class="btn btn-outline-secondary btn-sm">+</button>
-            </div>
-            <p class="fw-bold mb-0 text-success">S/ 149.00</p>
+            <p class="fw-bold mb-0 text-success fs-5">S/ {{ item.subtotal.toFixed(2) }}</p>
           </div>
         </div>
 
-        <!-- Copia de producto (ejemplo de varios) -->
-        <div class="card mb-3 card-producto p-3 d-flex flex-row align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/img/audifono.jpg" class="me-3" alt="Producto">
-            <div>
-              <h6 class="fw-bold mb-1">Auriculares Inalámbricos JBL Tune 510BT</h6>
-              <p class="mb-0 text-muted">Bluetooth, batería de 40 horas</p>
-              <a href="#" class="text-danger small">Eliminar</a>
-            </div>
-          </div>
-          <div class="text-end">
-            <div class="d-flex align-items-center justify-content-end mb-2">
-              <button class="btn btn-outline-secondary btn-sm">−</button>
-              <span class="mx-2">1</span>
-              <button class="btn btn-outline-secondary btn-sm">+</button>
-            </div>
-            <p class="fw-bold mb-0 text-success">S/ 249.00</p>
-          </div>
-        </div>
+        <!-- Botón continuar comprando -->
+        <button class="btn btn-outline-primary w-100 mt-3" (click)="continuarComprando()">
+          <i class="fas fa-arrow-left"></i> Continuar Comprando
+        </button>
       </div>
-      
 
       <!-- Resumen de compra -->
       <div class="col-lg-4">
-        <div class="resumen-compra shadow-sm">
-          <h5 class="fw-bold">Resumen de compra</h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span>Productos</span>
-            <span>S/ 1,496.00</span>
+        <div class="resumen-compra shadow-sm sticky-top" style="top: 20px;">
+          <h5 class="fw-bold mb-4">
+            <i class="fas fa-receipt"></i> Resumen de compra
+          </h5>
+          
+          <div class="d-flex justify-content-between mb-2">
+            <span>Subtotal ({{ carrito.cantidadTotal }} items)</span>
+            <span>S/ {{ carrito.total.toFixed(2) }}</span>
           </div>
-          <div class="d-flex justify-content-between">
+          
+          
+          <div class="d-flex justify-content-between mb-3">
             <span>Gastos de entrega</span>
-            <span>S/0</span>
+            <span *ngIf="tieneEnvioGratis" class="text-success fw-bold">
+              <i class="fas fa-check-circle"></i> ¡GRATIS!
+            </span>
+            <span *ngIf="!tieneEnvioGratis">S/ {{ costoEnvio.toFixed(2) }}</span>
           </div>
+          
+          <!-- Mensaje de envío gratis -->
+          <div *ngIf="!tieneEnvioGratis" class="alert alert-info small mb-3">
+            <i class="fas fa-truck"></i> 
+            Agrega <strong>S/ {{ faltaParaEnvioGratis.toFixed(2) }}</strong> más para envío gratis
+          </div>
+
+          <!-- Mensaje cuando tiene envío gratis -->
+          <div *ngIf="tieneEnvioGratis" class="alert alert-success small mb-3">
+            <i class="fas fa-gift"></i> 
+            ¡Felicitaciones! Tienes <strong>envío gratis</strong>
+          </div>
+          
           <hr>
-          <div class="d-flex justify-content-between fw-bold fs-5">
+          
+          <div class="d-flex justify-content-between fw-bold fs-4 mb-4">
             <span>Total</span>
-            <span>S/ 1,496.0</span>
+            <span class="text-success">S/ {{ totalFinal.toFixed(2) }}</span>
           </div>
-         <a href="#" (click)="goToPago($event)" class="btn btn-danger w-100 mt-3">Ir a Pagar</a>
+          
+          <a href="#" 
+             (click)="goToPago($event)" 
+             class="btn btn-danger w-100 btn-lg">
+            <i class="fas fa-credit-card"></i> Ir a Pagar
+          </a>
+          
+          <div class="mt-3 text-center">
+            <small class="text-muted">
+              <i class="fas fa-lock"></i> Compra 100% segura
+            </small>
+          </div>
+
+          <!-- Detalle del ahorro en envío -->
+          <div *ngIf="tieneEnvioGratis" class="mt-3 text-center">
+            <small class="text-success">
+              <i class="fas fa-piggy-bank"></i> 
+              Ahorraste S/ {{ COSTO_ENVIO.toFixed(2) }} en envío
+            </small>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </main>
-  <app-footer></app-footer>
+</main>
+<app-footer></app-footer>

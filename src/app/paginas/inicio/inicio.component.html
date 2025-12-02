@@ -166,32 +166,62 @@
     </div>
   </section>
   <!-- TODOS LOS PRODUCTOS -->
-  <section class="max-w-7xl mx-auto px-6 mb-16">
-    <h2 class="text-4xl font-extrabold text-purple-300 mb-8 section-header">
-      <i class="fas fa-th-large text-purple-500 mr-2"></i>Todos los Productos
-    </h2>
+  <!-- TODOS LOS PRODUCTOS -->
+<section class="max-w-7xl mx-auto px-6 mb-16">
+  <h2 class="text-4xl font-extrabold text-purple-300 mb-8 section-header">
+    <i class="fas fa-th-large text-purple-500 mr-2"></i>Todos los Productos
+  </h2>
 
-    <!--DIV PADREEEEE-->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+  <!-- Mensaje de éxito -->
+  <div *ngIf="mensajeExito" 
+       class="fixed top-20 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-fade-in">
+    {{ mensajeExito }}
+  </div>
 
-      <!-- Aquí van todas tus cards, tal cual como las copiaste -->
-       <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow" *ngFor="let p of productos">
-       <!--<div class="offer-badge">-10%</div>-->
-        <img [src]="'http://localhost:8082/img/' + p.imagenPrincipal" class="w-full h-56 object-contain bg-black" alt="{{p.nombre}}">
-       <div class="p-6">
-          <span class="text-xs uppercase bg-purple-600 px-2 py-1 rounded-full">{{p.marca}}</span>
-          <h2 class="text-2xl font-bold text-purple-300 mt-3">{{p.nombre}}</h2>
-          <p class="text-gray-300 mt-2" style="height: 70px;">{{p.descripcion}}</p>
-          <span class="text-xl font-extrabold price-gradient">S/ .{{p.precio}}</span>
-          <div class="flex justify-between items-center mt-3">
-            <button class="btn-neon" onclick="location.href='Detalle-producto.html?id=1'">Ver Detalles</button>
-            <button class="btn btn-success py-2" onclick="location.href='Detalle-producto.html?id=1'">Añadir producto</button>
-          </div>
-        </div>
+  <!--DIV PADRE-->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div class="bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative card-glow" 
+         *ngFor="let p of productos">
+      
+      <!-- Badge de sin stock -->
+      <div *ngIf="p.stock <= 0" class="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full z-10">
+        Sin Stock
       </div>
       
+      <!-- Badge de en carrito -->
+      <div *ngIf="productoEnCarrito(p.idProducto)" 
+           class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full z-10">
+        ✓ En Carrito
+      </div>
+      
+      <img [src]="'http://localhost:8082/img/' + p.imagenPrincipal" 
+           class="w-full h-56 object-contain bg-black" 
+           alt="{{p.nombre}}">
+      
+      <div class="p-6">
+        <span class="text-xs uppercase bg-purple-600 px-2 py-1 rounded-full">{{p.marca}}</span>
+        <h2 class="text-2xl font-bold text-purple-300 mt-3">{{p.nombre}}</h2>
+        <p class="text-gray-300 mt-2" style="height: 70px;">{{p.descripcion}}</p>
+        <div class="flex justify-between items-center">
+          <span class="text-xl font-extrabold price-gradient">S/ {{p.precio}}</span>
+          <span class="text-sm text-gray-400">Stock: {{p.stock}}</span>
+        </div>
+        
+        <div class="flex justify-between items-center mt-3 gap-2">
+          <button class="btn-neon flex-1">Ver Detalles</button>
+          <button 
+            class="btn btn-success py-2 flex-1"
+            [disabled]="p.stock <= 0"
+            [class.opacity-50]="p.stock <= 0"
+            [class.cursor-not-allowed]="p.stock <= 0"
+            (click)="agregarAlCarrito(p)">
+            {{ p.stock <= 0 ? 'Sin Stock' : 'Añadir al Carrito' }}
+          </button>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
 </div>
 
