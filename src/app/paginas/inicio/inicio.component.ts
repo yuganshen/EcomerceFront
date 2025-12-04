@@ -40,6 +40,17 @@ export class InicioComponent {
   }
 
 
+   filtrar(event: any) {
+    const tipo = event.target.value;
+    if (tipo === "") {
+      this.cargarProductos(); // Mostrar todo si selecciona vacío
+    } else {
+      this.apiproducto.filtrarPorTipo(tipo).subscribe(data => {
+        this.productos = data;
+      });
+    }
+  }
+
    /**
    * Agregar producto al carrito
    */
