@@ -30,7 +30,7 @@ export const routes: Routes = [
   { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard] },
   { path: 'detallecompra', component: DetallecompraComponent, canActivate: [AuthGuard] },
   { path: 'pago', component: PagoComponent, canActivate: [AuthGuard] },
-  { path: 'gestionpedidos', component: GestionPedidosComponent, canActivate: [AuthGuard] },
+  { path: 'gestionpedidos', component: GestionPedidosComponent, canActivate: [AdminGuard] },
 
   // Rutas de administrador (requieren autenticación + rol admin)
   { path: 'inicioadmin', component: InicioAdminComponent, canActivate: [AdminGuard] },
