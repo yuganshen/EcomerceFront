@@ -14,4 +14,8 @@ export class ApiproductoService {
   obtenerProductos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/obtenerProductos`);
   }
+
+  filtrarPorTipo(tipo: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/filtrarProductos?tipo=${tipo}`);
+  }
 }

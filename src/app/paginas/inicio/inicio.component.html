@@ -155,13 +155,13 @@
   <section class="max-w-7xl mx-auto p-6">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4 ">
       <label for="">BUSCAR PRODUCTOS:</label>
-      <select  class="px-5 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <option>TODOS</option>
-        <option>Teclados</option>
-        <option>Ratones</option>
-        <option>Monitores</option>
-        <option>Laptops</option>
-        <option>Accesorios</option>
+      <select  (change)="filtrar($event)" class="px-5 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" >
+        <option value="">TODOS</option>
+        <option value="teclado">Teclados</option>
+        <option value="raton">Ratones</option>
+        <option value="monitor">Monitores</option>
+        <option value="laptop">Laptops</option>
+        <option value="accesorio">Accesorios</option>
       </select>
     </div>
   </section>
