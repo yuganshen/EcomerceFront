@@ -18,4 +18,8 @@ export class ApiproductoService {
   filtrarPorTipo(tipo: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/filtrarProductos?tipo=${tipo}`);
   }
+    agregarProducto(data: any): Observable<any> {
+    return this.http.post(`${this.url}/agregar`, data, { responseType: 'text' });
+  }
+
 }
