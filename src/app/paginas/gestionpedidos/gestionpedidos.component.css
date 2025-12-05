@@ -48,3 +48,6 @@ button {
 .btn-info:hover {
   background-color: #1976d2;
 }
+input{
+  width: 800px;
+}

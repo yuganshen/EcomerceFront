@@ -27,14 +27,12 @@ header {
   background: rgba(111, 45, 189, 0.08);
   padding: 2rem;
   border-radius: 15px;
-  margin: 2rem auto;
-  width: 90%;
-  max-width: 900px;
+  margin: 2rem;
   box-shadow: 0 0 15px rgba(154, 77, 255, 0.3);
 }
 
-input,
-button {
+input
+ {
   padding: 0.7rem;
   margin: 0.5rem 0;
   border-radius: 10px;
@@ -42,22 +40,13 @@ button {
 }
 
 input {
-  width: 100%;
+  width: 400px;
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
   outline: none;
 }
 
-button {
-  background: var(--accent-1);
-  color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-}
 
-button:hover {
-  background: var(--accent-2);
-}
 
 table {
   width: 100%;
@@ -78,4 +67,19 @@ th {
 
 .actions button {
   margin-right: 0.4rem;
+}
+
+.morado{
+  color: #9a4dff;
+}
+
+
+.contenido-pro{
+  display: flex;
+  justify-content: center;
+}
+
+.formu{
+  display: flex;
+  flex-direction: column;
 }
