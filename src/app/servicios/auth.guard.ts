@@ -61,7 +61,7 @@ export class AdminGuard implements CanActivate {
       });
     } else {
       // Si está autenticado pero no es admin, ir a inicio
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }
     
     return false;

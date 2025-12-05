@@ -3,7 +3,61 @@
 <div class="container py-4">
   <h4 class="fw-bold mb-4 blanco">Pago</h4>
 
-  <div class="row">
+  <!-- Comprobante en pantalla después de finalizar compra -->
+  <div *ngIf="receiptShown" class="card p-4 mb-4">
+    <h5 class="fw-bold">Comprobante de Pago</h5>
+    <div class="small text-muted mb-2">
+      <span *ngIf="receiptData.idPedido">ID Pedido: <strong>{{ receiptData.idPedido }}</strong></span>
+      <span class="ms-2">Fecha: {{ receiptData.fecha | date:'medium' }}</span>
+    </div>
+
+    <div class="mb-3">
+      <strong>Dirección de envío:</strong> {{ receiptData.direccionEnvio }}
+    </div>
+
+    <div class="mb-3">
+      <strong>Tipo de entrega:</strong> {{ receiptData.tipoEntrega }}
+    </div>
+
+    <div class="mb-3">
+      <strong>Productos:</strong>
+      <ul>
+        <li *ngFor="let it of receiptData.items">{{ it.nombre }} x{{ it.cantidad }} — S/ {{ it.subtotal.toFixed(2) }}</li>
+      </ul>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <span>Subtotal</span>
+      <span>S/ {{ receiptData.subtotal.toFixed(2) }}</span>
+    </div>
+    <div class="d-flex justify-content-between">
+      <span>Envío</span>
+      <span>S/ {{ receiptData.envio.toFixed(2) }}</span>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between fw-bold fs-5">
+      <span>Total</span>
+      <span>S/ {{ receiptData.total.toFixed(2) }}</span>
+    </div>
+
+    <div class="mt-3">
+      <strong>Método de pago:</strong> {{ receiptData.metodoPago }}
+      <div *ngIf="receiptData.detallesPago">
+        <div *ngIf="receiptData.detallesPago.card">Titular: {{ receiptData.detallesPago.holder }}</div>
+        <div *ngIf="receiptData.detallesPago.card">Tarjeta: {{ receiptData.detallesPago.card }}</div>
+        <div *ngIf="receiptData.detallesPago.provider">Proveedor: {{ receiptData.detallesPago.provider }}</div>
+        <div *ngIf="receiptData.detallesPago.phone">Teléfono: {{ receiptData.detallesPago.phone }}</div>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button class="btn btn-primary" (click)="printReceipt()">Imprimir comprobante</button>
+      <button class="btn btn-outline-secondary" (click)="completeAndFinish()">Finalizar y volver al inicio</button>
+      <button class="btn btn-light" (click)="receiptShown=false">Cerrar comprobante</button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!receiptShown">
     <!-- Sección izquierda -->
     <div class="col-lg-8">
 
@@ -40,32 +94,14 @@
           </div>
         </div>
 
-        <!-- Formulario delivery -->
-        <form class="mt-3" *ngIf="entrega==='delivery'">
+        <!-- Formulario delivery / dirección de envío -->
+        <form class="mt-3">
           <div class="row g-2">
-            <div class="col-md-6">
-              <label class="form-label blanco">Nombre completo</label>
-              <input type="text" class="form-control" placeholder="Ej: James Quispe">
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label blanco">Teléfono</label>
-              <input type="text" class="form-control" placeholder="999999999">
-            </div>
-
             <div class="col-12">
-              <label class="form-label blanco">Dirección</label>
-              <input type="text" class="form-control" placeholder="Calle, número, referencia">
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label blanco">Ciudad</label>
-              <input type="text" class="form-control" placeholder="Ciudad">
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label blanco">Provincia</label>
-              <input type="text" class="form-control" placeholder="Provincia">
+              <label class="form-label blanco">Dirección de envío *</label>
+              <input type="text" class="form-control" placeholder="Calle, número, referencia" 
+                     [(ngModel)]="direccionEnvio" name="direccionEnvio" required>
+              <small class="text-muted">Requerida para procesar el pedido</small>
             </div>
           </div>
         </form>
@@ -78,22 +114,17 @@
         <div class="list-group">
           <label class="list-group-item">
             <input class="form-check-input me-2" type="radio" name="pago" value="credito"
-                   (change)="pago='credito'"> Tarjeta de crédito
+                   [(ngModel)]="pago"> Tarjeta de crédito
           </label>
 
           <label class="list-group-item">
             <input class="form-check-input me-2" type="radio" name="pago" value="debito"
-                   (change)="pago='debito'"> Tarjeta de débito
+                   [(ngModel)]="pago"> Tarjeta de débito
           </label>
 
           <label class="list-group-item">
             <input class="form-check-input me-2" type="radio" name="pago" value="billeteras"
-                   (change)="pago='billeteras'"> Billeteras digitales
-          </label>
-
-          <label class="list-group-item">
-            <input class="form-check-input me-2" type="radio" name="pago" value="efectivo"
-                   (change)="pago='efectivo'"> PagoEfectivo
+                   [(ngModel)]="pago"> Billeteras digitales
           </label>
         </div>
 
@@ -102,22 +133,36 @@
           <div class="row g-2">
             <div class="col-md-6">
               <label class="form-label blanco">Número de tarjeta</label>
-              <input type="text" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX">
+              <input type="text" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" [(ngModel)]="cardNumber" name="cardNumber">
             </div>
 
             <div class="col-md-3">
               <label class="form-label blanco">Vencimiento</label>
-              <input type="text" class="form-control" placeholder="MM/AA">
+              <input type="text" class="form-control" placeholder="MM/AA" [(ngModel)]="cardExpiry" name="cardExpiry">
             </div>
 
             <div class="col-md-3">
               <label class="form-label blanco">CVV</label>
-              <input type="text" class="form-control" placeholder="123">
+              <input type="text" class="form-control" placeholder="123" [(ngModel)]="cardCVV" name="cardCVV">
             </div>
 
             <div class="col-12">
               <label class="form-label blanco">Nombre del titular</label>
-              <input type="text" class="form-control" placeholder="Nombre como figura en la tarjeta">
+              <input type="text" class="form-control" placeholder="Nombre como figura en la tarjeta" [(ngModel)]="cardHolder" name="cardHolder">
+            </div>
+          </div>
+        </form>
+
+        <!-- Formulario de billeteras digitales -->
+        <form class="mt-3" *ngIf="pago==='billeteras'">
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label blanco">Proveedor</label>
+              <input type="text" class="form-control" placeholder="Ej: Yape, Plin" [(ngModel)]="walletProvider" name="walletProvider">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label blanco">Teléfono / Usuario</label>
+              <input type="text" class="form-control" placeholder="Número o ID" [(ngModel)]="walletPhone" name="walletPhone">
             </div>
           </div>
         </form>
@@ -126,27 +171,81 @@
 
     <!-- Resumen compra -->
     <div class="col-lg-4 mt-4 mt-lg-0">
-      <div class="resumen-compra shadow-sm">
-        <h5 class="fw-bold text-dark">Resumen de compra</h5>
+      <div class="resumen-compra shadow-sm sticky-top" style="top: 20px;">
+        <h5 class="fw-bold mb-4">
+          <i class="fas fa-receipt"></i> Resumen de compra
+        </h5>
 
-        <div class="d-flex justify-content-between mt-3 text-dark">
-          <span>Productos</span>
-          <span>S/ 1,496.00</span>
+        <!-- Mostrar productos del carrito -->
+        <div *ngIf="carrito.items.length > 0; else carritoVacio" class="mb-3">
+          <div class="small text-muted mb-2">
+            <strong>Productos en el carrito ({{ carrito.cantidadTotal }}):</strong>
+          </div>
+          <div class="list-unstyled">
+            <div *ngFor="let item of carrito.items" class="d-flex justify-content-between mb-2 text-muted small">
+              <span>{{ item.nombre }} x{{ item.cantidad }}</span>
+              <span>S/ {{ item.subtotal.toFixed(2) }}</span>
+            </div>
+          </div>
+          <hr>
         </div>
 
-        <div class="d-flex justify-content-between text-dark">
+        <ng-template #carritoVacio>
+          <div class="alert alert-warning small mb-3">
+            <i class="fas fa-exclamation-triangle"></i> El carrito está vacío
+          </div>
+        </ng-template>
+
+        <div class="d-flex justify-content-between mb-2 text-dark">
+          <span>Subtotal ({{ carrito.cantidadTotal }} items)</span>
+          <span>S/ {{ carrito.total.toFixed(2) }}</span>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3 text-dark">
           <span>Gastos de entrega</span>
-          <span>S/ 30.90</span>
+          <span *ngIf="tieneEnvioGratis" class="text-success fw-bold">
+            <i class="fas fa-check-circle"></i> ¡GRATIS!
+          </span>
+          <span *ngIf="!tieneEnvioGratis">S/ {{ costoEnvio.toFixed(2) }}</span>
+        </div>
+
+        <!-- Mensaje de envío gratis -->
+        <div *ngIf="!tieneEnvioGratis" class="alert alert-info small mb-3">
+          <i class="fas fa-truck"></i> 
+          Agrega <strong>S/ {{ faltaParaEnvioGratis.toFixed(2) }}</strong> más para envío gratis
+        </div>
+
+        <!-- Mensaje cuando tiene envío gratis -->
+        <div *ngIf="tieneEnvioGratis" class="alert alert-success small mb-3">
+          <i class="fas fa-gift"></i> 
+          ¡Felicitaciones! Tienes <strong>envío gratis</strong>
         </div>
 
         <hr>
 
-        <div class="d-flex justify-content-between fw-bold fs-5 text-dark">
+        <div class="d-flex justify-content-between fw-bold fs-5 text-dark mb-3">
           <span>Total</span>
-          <span>S/ 1,536.90</span>
+          <span class="text-success">S/ {{ totalFinal.toFixed(2) }}</span>
         </div>
 
-        <ul><li><a routerLink="" class="btn btn-danger w-100 mt-3">Finalizar compra</a></li></ul>
+        <!-- Mostrar mensaje de error si existe -->
+        <div *ngIf="errorMsg" class="alert alert-danger small mb-3">
+          <i class="fas fa-exclamation-circle"></i> {{ errorMsg }}
+        </div>
+
+        <!-- Mostrar estado de carga -->
+        <div *ngIf="cargando" class="alert alert-info small mb-3">
+          <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          Procesando tu pedido...
+        </div>
+
+        <button class="btn btn-danger w-100 mb-2" (click)="finalizarCompra()" [disabled]="!canFinalize || receiptShown || cargando" title="Completa método de pago y campos para habilitar">
+          <i class="fas fa-check-circle"></i> {{ cargando ? 'Procesando...' : 'Finalizar compra' }}
+        </button>
+
+        <a routerLink="/carrito" class="btn btn-outline-secondary w-100">
+          <i class="fas fa-arrow-left"></i> Volver al carrito
+        </a>
       </div>
     </div>
   </div>
