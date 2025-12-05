@@ -6,55 +6,45 @@
                 <p class="mb-4 blanco">Administra y actualiza tu información personal de forma sencilla.</p>
 
                 <div class="card shadow p-4">
-                    <!-- Añadí method y action como ejemplo -->
-                    <form method="post" action="#" novalidate>
+                    <form (ngSubmit)="guardarCambios()" #perfilForm="ngForm" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre"
-                                    placeholder="Ingresa tu nombre" required>
+                                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido"
-                                    placeholder="Ingresa tu apellido" required>
+                                <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="apellidos" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="correo" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correo" name="correo"
-                                    placeholder="ejemplo@correo.com" required>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="dni" class="form-label">Documento de identidad</label>
-                                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ej: 12345678"
-                                    maxlength="12" inputmode="numeric" required>
+                                <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="email" disabled>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="celular" class="form-label">Celular</label>
-                                <input type="tel" class="form-control" id="celular" name="celular"
-                                    placeholder="999-999-999" pattern="[0-9]{9}" inputmode="tel" required>
-                                <div class="form-text">Formato: 9 dígitos (sin espacios ni guiones)</div>
+                                <input type="tel" class="form-control" id="celular" name="celular" [(ngModel)]="telefono">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="fecha_nac" class="form-label">Fecha de nacimiento</label>
-                                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
+                                <label for="password" class="form-label">Nueva contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="contrasena" minlength="6">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="confirmpassword" class="form-label">Confirmar contraseña</label>
+                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" [(ngModel)]="confirmarContrasena" minlength="6">
                             </div>
                         </div>
 
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="terminos" name="terminos" required>
-                            <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
-                        </div>
+                        <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+                        <div *ngIf="successMsg" class="alert alert-success">{{ successMsg }}</div>
 
                         <div class="text-end">
-                            <button type="submit" class="btn btn-danger">Editar información</button>
+                            <button type="submit" class="btn btn-danger" [disabled]="cargando">Guardar cambios</button>
                         </div>
-
                     </form>
                 </div>
 

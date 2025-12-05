@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   cargando = false;
   mostrarPassword = false;
   mensajeError: string | null = null;
-  urlRetorno: string = '/';
+  urlRetorno: string = '/catalogo';
 
   // Para destruir subscripciones
   private destroy$ = new Subject<void>();
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (this.authService.esAdministrador()) {
         this.router.navigate(['/inicioadmin']);
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/catalogo']);
       }
       return;
     }
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {
-      this.urlRetorno = params['returnUrl'] || '/';
+      this.urlRetorno = params['returnUrl'] || '/catalogo';
     });
 
     // Suscribirse a cambios de estado del servicio

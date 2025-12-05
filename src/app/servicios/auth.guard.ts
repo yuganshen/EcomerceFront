@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
     }
 
     // Si no está autenticado, redirigir al login con URL de retorno
-    this.router.navigate(['/login'], {
+    this.router.navigate(['/'], {
       queryParams: { returnUrl: state.url }
     });
     
@@ -56,12 +56,12 @@ export class AdminGuard implements CanActivate {
 
     // Si no es administrador o no está autenticado
     if (!this.authService.estaAutenticado()) {
-      this.router.navigate(['/login'], {
+      this.router.navigate(['/'], {
         queryParams: { returnUrl: state.url }
       });
     } else {
-      // Si está autenticado pero no es admin, ir a inicio
-      this.router.navigate(['/login']);
+      // Si está autenticado pero no es admin, ir a catalogo
+      this.router.navigate(['/catalogo']);
     }
     
     return false;

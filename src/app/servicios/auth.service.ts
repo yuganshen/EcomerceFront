@@ -1,8 +1,9 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
 /**
  * DTOs para comunicación con el backend
@@ -68,6 +69,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
@@ -155,20 +157,18 @@ export class AuthService {
    * @returns Observable con los datos del usuario
    */
   obtenerInfoUsuario(): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}/info`);
+    const token = this.obtenerToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return this.http.get<any>(`${this.API_URL}/info`, { headers });
   }
 
   /**
    * Logout - Limpia el estado y token del usuario
    */
-  logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('usuario');
-    }
-    this.usuarioAutenticadoSubject.next(null);
-    this.errorSubject.next(null);
-  }
+
 
   /**
    * Obtener token del localStorage
@@ -349,5 +349,60 @@ export class AuthService {
         }
       );
     }
+  }
+
+  /**
+   * Logout - Cierra la sesión del usuario
+   * Elimina el token del almacenamiento y limpia el estado
+   * @returns Observable con la respuesta del backend
+   */
+  logout(): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/logout`, {}).pipe(
+      tap({
+        next: () => {
+          // Limpiar token y datos del usuario del almacenamiento local
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('usuario');
+            localStorage.removeItem('rol');
+          }
+
+          // Limpiar el estado
+          this.usuarioAutenticadoSubject.next(null);
+          this.errorSubject.next(null);
+
+          // Redirigir a login usando router
+          this.router.navigateByUrl('/');
+        },
+        error: (err) => {
+          console.error('Error al cerrar sesión:', err);
+          
+          // Aunque haya error, limpiar el cliente
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('usuario');
+            localStorage.removeItem('rol');
+          }
+
+          this.usuarioAutenticadoSubject.next(null);
+          this.errorSubject.next('Error al cerrar sesión');
+          
+          // Redirigir igual aunque haya error
+          this.router.navigateByUrl('/');
+        }
+      }),
+      // Asegurar que siempre se completa el Observable
+      catchError((error) => {
+        // Limpiar incluso si hay error no capturado
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('usuario');
+          localStorage.removeItem('rol');
+        }
+        this.usuarioAutenticadoSubject.next(null);
+        this.router.navigateByUrl('/');
+        return of({ error: true, message: error });
+      })
+    );
   }
 }

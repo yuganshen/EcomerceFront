@@ -18,24 +18,23 @@ import { AuthGuard, AdminGuard } from './servicios/auth.guard';
 
 export const routes: Routes = [
   // Rutas públicas
-  { path: '', component: InicioComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'catalogo', component: InicioComponent },
+  { path: '', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'memorias', component: MemoriasRamComponent },
-  { path: 'procesadores', component: ProcesadoresComponent },
 
-  // Rutas protegidas (requieren autenticación)
+
+  // Rutas protegidas (requieren autenticación y rol CLIENTE)
   { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard] },
   { path: 'detallecompra', component: DetallecompraComponent, canActivate: [AuthGuard] },
   { path: 'pago', component: PagoComponent, canActivate: [AuthGuard] },
-  { path: 'gestionpedidos', component: GestionPedidosComponent, canActivate: [AdminGuard] },
 
   // Rutas de administrador (requieren autenticación + rol admin)
   { path: 'inicioadmin', component: InicioAdminComponent, canActivate: [AdminGuard] },
   { path: 'gestionusuarios', component: GestionUsuariosComponent, canActivate: [AdminGuard] },
   { path: 'gestionproductos', component: GestionProductosComponent, canActivate: [AdminGuard] },
+  { path: 'gestionpedidos', component: GestionPedidosComponent, canActivate: [AdminGuard] },
   { path: 'navbaradmin', component: NavbarAdminComponent, canActivate: [AdminGuard] }
 ];
 

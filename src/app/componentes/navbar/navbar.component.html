@@ -23,12 +23,12 @@
           <li><a routerLink="/perfil" class="dropdown-item">Mi Perfil</a></li>
           <li><a routerLink="/compras" class="dropdown-item">Historial</a></li>
           <hr>
-          <li><a class="logout" routerLink="/login" class="dropdown-item">Cerrar sesión</a></li>
+          <li><a class="logout dropdown-item" (click)="logout()">Cerrar sesión</a></li>
         </ul>
 
       </li>
 
-      <li><a routerLink="/">Catálogo</a></li>
+      <li><a routerLink="/catalogo">Catálogo</a></li>
 
       <!-- Carrito con badge -->
       <li class="position-relative">

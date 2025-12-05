@@ -2,6 +2,7 @@ import { Component, OnInit , ElementRef, HostListener, ViewChild} from '@angular
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CarritoService } from '../../servicios/apiCarrito/api-carrito.service';
+import { AuthService } from '../../servicios/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,7 @@ import { CarritoService } from '../../servicios/apiCarrito/api-carrito.service';
 })
 export class NavbarComponent implements OnInit{
    cantidadItems: number = 0;
-constructor(private carritoService: CarritoService) {}
+constructor(private carritoService: CarritoService, private authService: AuthService) {}
 
   ngOnInit(): void {
     // Suscribirse para actualizar la cantidad en tiempo real
@@ -54,6 +55,13 @@ userOpen = false;
   }
 
   logout() {
-    console.log("Cerrar sesión");
+    this.authService.logout().subscribe({
+      next: () => {
+        console.log("Sesión cerrada exitosamente");
+      },
+      error: (error: any) => {
+        console.error("Error al cerrar sesión:", error);
+      }
+    });
   }
 }
