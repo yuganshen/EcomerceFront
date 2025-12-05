@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NavbarAdminComponent } from '../../componentes/navbaradmin/navbaradmin.component';
@@ -15,15 +15,21 @@ declare var bootstrap: any;
 export class GestionProductosComponent {
 
   productoForm: FormGroup;
+  @ViewChild('inputAdd') inputAdd!: any;
+  @ViewChild('inputEdit') inputEdit!: any;
+
 
   productos: any[] = [];
 
   productoEdit: any = { idproducto: null, nombre: "", precio: 0, cantidad: 0, tipo: "" };
   modalEditar: any;
 
-  constructor(private fb: FormBuilder, private api: ApiproductoService) { 
-    this.productoForm=this.fb.group({
-      nombre: ['', Validators   .required],
+  previewNuevaImagen: any = null;
+  archivoNuevaImagen: File | null = null;
+
+  constructor(private fb: FormBuilder, private api: ApiproductoService) {
+    this.productoForm = this.fb.group({
+      nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       precio: [0, Validators.required],
       stock: [0, Validators.required],
@@ -50,13 +56,55 @@ export class GestionProductosComponent {
     });
   }
 
-  agregarProducto(){
-    if(this.productoForm.valid){
-      console.log(this.productoForm.value);
-      this.api.agregarProducto(this.productoForm.value).subscribe({
+  onArchivoSeleccionado(event: any) {
+    const archivo = event.target.files[0];
+    if (archivo) {
+      this.productoForm.patchValue({
+        imagenPrincipal: archivo
+      });
+    }
+  }
+
+
+
+  onNuevaImagen(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    this.archivoNuevaImagen = file;
+
+    // Vista previa
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewNuevaImagen = reader.result; // base64 temporal
+    };
+    reader.readAsDataURL(file);
+  }
+
+
+
+
+  agregarProducto() {
+    if (this.productoForm.valid) {
+      const formData = new FormData();
+
+      // Recorremos los campos del formulario
+      Object.keys(this.productoForm.value).forEach(key => {
+        // Si es el archivo, lo agregamos correctamente
+        if (key === 'imagenPrincipal' && this.productoForm.value[key]) {
+          formData.append(key, this.productoForm.value[key]);
+        } else {
+          formData.append(key, this.productoForm.value[key]);
+        }
+      });
+
+      this.api.agregarProducto(formData).subscribe({
         next: (res) => {
           console.log("Producto registrado:", res);
           this.productoForm.reset();
+          this.inputAdd.nativeElement.value = "";  // <<< limpia el archivo
+
+          this.cargarProductos();
         },
         error: (err) => {
           console.error("Error al enviar:", err);
@@ -64,105 +112,54 @@ export class GestionProductosComponent {
       });
     }
   }
-/*
+
   eliminarProducto(id: number) {
     if (confirm('¿Seguro que deseas eliminar este producto?')) {
       this.api.eliminarProducto(id).subscribe(() => {
-        this.cargarProductos(); 
-      });
-    }
-  }
-
-  filtrar(event: any) {
-    const tipo = event.target.value;
-    if (tipo === "") {
-      this.cargarProductos(); 
-    } else {
-      this.api.filtrarPorTipo(tipo).subscribe(data => {
-        this.productos = data;
+        this.cargarProductos();
       });
     }
   }
 
   editarProducto(id: number) {
-  this.api.obtenerProductoPorId(id).subscribe(prod => {
-    this.productoEdit = { ...prod }; 
+    this.api.obtenerProductoPorId(id).subscribe(prod => {
+      this.productoEdit = { ...prod }; // clonar datos del backend
+
+      // abrir modal
+      this.modalEditar = new bootstrap.Modal(document.getElementById('modalEditar'));
+      this.modalEditar.show();
+    });
+  }
 
 
-    this.modalEditar = new bootstrap.Modal(document.getElementById('modalEditar'));
-    this.modalEditar.show();
+  guardarCambios() {
+  const formData = new FormData();
+
+  formData.append("nombre", this.productoEdit.nombre);
+  formData.append("descripcion", this.productoEdit.descripcion);
+  formData.append("precio", this.productoEdit.precio);
+  formData.append("stock", this.productoEdit.stock);
+  formData.append("marca", this.productoEdit.marca);
+  formData.append("tipoProducto", this.productoEdit.tipoProducto);
+  formData.append("estado", this.productoEdit.estado);
+
+  if (this.archivoNuevaImagen) {
+    formData.append("imagenPrincipal", this.archivoNuevaImagen);
+  }
+
+  this.api.editarProducto(this.productoEdit.idProducto, formData).subscribe({
+    next: () => {
+      alert("Producto actualizado");
+      this.cargarProductos();
+      this.modalEditar.hide();
+      this.inputEdit.nativeElement.value = "";
+      this.previewNuevaImagen = null;
+      this.archivoNuevaImagen = null;
+    },
+    error: (err) => console.error(err)
   });
 }
 
-guardarCambios() {
-  const id = this.productoEdit.idproducto;
-
-  this.api.editarProducto(id, this.productoEdit).subscribe(() => {
-    alert("Producto actualizado correctamente");
-
-    this.modalEditar.hide(); 
-    this.cargarProductos();  
-  });
-------------------------------------------------------------------*/
 
 
-  /*
-  products: { name: string; price: number }[] = [];
-  productName: string = '';
-  productPrice: string | number = '';
-
-  constructor() {
-    this.loadProducts();
-  }
-
-  loadProducts() {
-    const stored = localStorage.getItem('products');
-    this.products = stored ? JSON.parse(stored) : [];
-  }
-
-  saveProducts() {
-    localStorage.setItem('products', JSON.stringify(this.products));
-  }
-addProduct() {
-    if (!this.productName || !this.productPrice) {
-      alert('Completa todos los campos');
-      return;
-    }
-
-    this.products.push({
-      name: this.productName,
-      price: Number(this.productPrice),
-    });
-
-    this.saveProducts();
-
-    // Limpiar inputs
-    this.productName = '';
-    this.productPrice = '';
-  }
-
-  editProduct(index: number) {
-    const newName = prompt(
-      'Nuevo nombre del producto:',
-      this.products[index].name
-    );
-    const newPrice = prompt(
-      'Nuevo precio:',
-      this.products[index].price.toString()
-    );
-
-    if (newName && newPrice) {
-      this.products[index] = {
-        name: newName,
-        price: Number(newPrice),
-      };
-
-       this.saveProducts();
-    }
-  }
-
-  deleteProduct(index: number) {
-    this.products.splice(index, 1);
-    this.saveProducts();
-  }*/
 }

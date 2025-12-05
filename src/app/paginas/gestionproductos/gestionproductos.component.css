@@ -31,19 +31,19 @@ header {
   box-shadow: 0 0 15px rgba(154, 77, 255, 0.3);
 }
 
-input
- {
-  padding: 0.7rem;
-  margin: 0.5rem 0;
-  border-radius: 10px;
-  border: none;
-}
 
-input {
+
+
+
+.formu input {
   width: 400px;
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
   outline: none;
+  padding: 0.7rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  border: none;
 }
 
 
@@ -73,13 +73,38 @@ th {
   color: #9a4dff;
 }
 
-
 .contenido-pro{
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
 .formu{
   display: flex;
   flex-direction: column;
+}
+
+.imagen{
+  height: 80px;
+  width: auto;
+  margin: 0px auto;
+}
+
+.formulario{
+  display: flex;
+  justify-content: center;
+}
+.formu-hijo{
+  display: grid;
+  grid-template-columns: 500px 500px;
+}
+
+
+.boton{
+  display: flex;
+  align-items: center;
+}
+
+.boton button{
+  width: 398px;
 }
