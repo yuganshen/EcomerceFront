@@ -32,25 +32,35 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log('Interceptor: Token agregado a solicitud', request.url);
+    } else {
+      console.log('Interceptor: No hay token disponible para solicitud', request.url);
     }
 
     // Pasar la solicitud al siguiente manejador y manejar errores
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.error('Interceptor: Error en solicitud', request.url, 'Status:', error.status);
+        
         // Si es error 401 (Unauthorized), el token expiró o es inválido
-        if (error.status === 401) {
+        // Solo hacer logout si es una solicitud GET a /api/auth/info (verificación de sesión)
+        // Para otras solicitudes, dejar que el componente maneje el error
+        if (error.status === 401 && request.method === 'GET' && request.url.includes('/api/auth/info')) {
+          console.error('Interceptor: Token inválido o expirado (GET /auth/info) - limpiando autenticación');
           // Limpiar datos de autenticación
           this.authService.logout();
           
           // Redirigir al login
-          this.router.navigate(['/login'], {
+          this.router.navigate(['/'], {
             queryParams: { returnUrl: this.router.url }
           });
+        } else if (error.status === 401) {
+          console.warn('Interceptor: Error 401 en solicitud', request.method, request.url, '- no haciendo logout automático');
         }
 
         // Si es error 403 (Forbidden), no tiene permisos
         if (error.status === 403) {
-          console.error('Acceso denegado. No tienes permisos para esta acción.');
+          console.error('Interceptor: Acceso denegado (403). No tienes permisos para esta acción.');
         }
 
         // Propagar el error

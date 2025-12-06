@@ -1,70 +1,131 @@
 <app-navbar></app-navbar>
 
 <div class="container my-5">
-    <h3 class="blanco">Compras realizadas</h3>
-    <p class="mb-4 blanco">Verifica las compras que realizaste con el seguimiento que ofrecemos</p>
+  <h2 class="blanco mb-4">📦 Mis Pedidos</h2>
+  <p class="mb-4 blanco">Visualiza el estado de todos tus pedidos</p>
 
-    <form class="mb-4">
-        <input type="text" placeholder="Buscar por producto" required>
-        <button type="submit">Buscar</button>
-    </form>
-
-    <!-- Tarjeta 1 -->
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
-            <div class="d-flex align-items-center">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.A2OBoNvRq4W41DGTBDpH2wHaGJ?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Producto" class="producto-img me-3">
-                <div>
-                    <h5 class="mb-1">Monitor Gamer Asus VG13241</h5>
-                    <p class="mb-0 text-muted">Panel IPS, QHD, 144Hz</p>
-                    <p class="mb-0 text-muted">S/100.5</p>
-                    <small class="text-muted">Fecha: 13 de octubre de 2025</small>
-                </div>
-            </div>
-            <div class="text-end">
-                <p class="estado-pendiente mb-2">Recojo pendiente</p>
-                <a routerLink="/detallecompra" class="btn btn-outline-secondary btn-sm">Ver detalle</a>
-            </div>
-        </div>
+  <!-- Mensaje de carga -->
+  <div *ngIf="cargando" class="alert alert-info">
+    <div class="spinner-border spinner-border-sm me-2" role="status">
+      <span class="visually-hidden">Cargando...</span>
     </div>
+    Cargando pedidos...
+  </div>
 
-    <!-- Tarjeta 2 -->
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
-            <div class="d-flex align-items-center">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.0spFurFEnARv4Vrr5YKCwwHaEu?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Producto" class="producto-img me-3">
-                <div>
-                    <h5 class="mb-1">Teclado mecánico Redragon Kumara</h5>
-                    <p class="mb-0 text-muted">Switch Red, RGB</p>
-                    <p class="mb-0 text-muted">S/106</p>
-                    <small class="text-muted">Fecha: 2 de octubre de 2025</small>
-                </div>
-            </div>
-            <div class="text-end">
-                <p class="estado-completado mb-2">Entregado</p>
-                <a routerLink="/detallecompra" class="btn btn-outline-secondary btn-sm">Ver detalle</a>
-            </div>
-        </div>
-    </div>
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMsg && !cargando" class="alert alert-danger">
+    {{ errorMsg }}
+    <button class="btn btn-sm btn-danger mt-2" (click)="cargarPedidos()">Reintentar</button>
+  </div>
 
-    <!-- Tarjeta 3 -->
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body d-flex align-items-center justify-content-between flex-wrap">
-            <div class="d-flex align-items-center">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.ORA9KJIlVESd4G90JnwCTQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Producto" class="producto-img me-3">
-                <div>
-                    <h5 class="mb-1">Mouse Logitech G502 HERO</h5>
-                    <p class="mb-0 text-muted">Sensor 25K DPI, 11 botones</p>
-                    <p class="mb-0 text-muted">S/80.6</p>
-                    <small class="text-muted">Fecha: 28 de septiembre de 2025</small>
-                </div>
-            </div>
-            <div class="text-end">
-                <p class="estado-completado mb-2">Entregado</p>
-                <a routerLink="/detallecompra" class="btn btn-outline-secondary btn-sm">Ver detalle</a>
-            </div>
+  <!-- Lista de pedidos vacía -->
+  <div *ngIf="!cargando && pedidos.length === 0 && !errorMsg" class="alert alert-info">
+    <p class="mb-0">No tienes pedidos realizados aún. ¡Comienza a comprar en nuestro catálogo!</p>
+  </div>
+
+  <!-- Lista de pedidos -->
+  <div *ngIf="!cargando && pedidos.length > 0" class="pedidos-container">
+    <div *ngFor="let pedido of pedidos" class="pedido-card mb-4">
+      <!-- Encabezado del pedido -->
+      <div class="pedido-header">
+        <div class="pedido-info">
+          <h5 class="mb-0">Pedido #{{ pedido.idPedido }}</h5>
+          <small class="text-muted">{{ formatearFecha(pedido.fechaPedido) }}</small>
         </div>
+        <div class="pedido-estado">
+          <span [ngClass]="obtenerClaseEstado(pedido.estado)" class="estado-badge">
+            {{ obtenerTextoEstado(pedido.estado) }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Detalles de productos -->
+      <div class="pedido-body">
+        <div class="detalles-productos">
+          <table class="table table-sm mb-0">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-end">Precio Unitario</th>
+                <th class="text-end">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detalle of pedido.detalles">
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img *ngIf="detalle.imagenProducto" [src]="detalle.imagenProducto" alt="{{ detalle.nombreProducto }}" class="producto-img-small me-2">
+                    <span>{{ detalle.nombreProducto }}</span>
+                  </div>
+                </td>
+                <td class="text-center">{{ detalle.cantidad }}</td>
+                <td class="text-end">S/{{ detalle.precioUnitario.toFixed(2) }}</td>
+                <td class="text-end">S/{{ detalle.subtotal.toFixed(2) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Total del pedido -->
+        <div class="pedido-total">
+          <h6 class="mb-0">Total: <strong>S/{{ pedido.total.toFixed(2) }}</strong></h6>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="pedido-actions">
+          <button *ngIf="puedeCancelarse(pedido)" 
+                  class="btn btn-outline-danger btn-sm"
+                  (click)="abrirModalCancelar(pedido)">
+            🗑️ Cancelar Pedido
+          </button>
+          <button class="btn btn-outline-secondary btn-sm">
+            👁️ Ver Detalle
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal de cancelación -->
+<div *ngIf="mostrarModal" class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h5 class="modal-title">⚠️ Cancelar Pedido</h5>
+      <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="mb-3"><strong>Aviso importante:</strong></p>
+      <div class="alert alert-warning">
+        <p class="mb-2">Al cancelar este pedido, se procesará un reembolso a tu cuenta bancaria.</p>
+        <p class="mb-0">
+          <strong>El reembolso se realizará en un plazo máximo de 20 días hábiles</strong>, 
+          dependiendo de tu entidad financiera.
+        </p>
+      </div>
+      
+      <p class="text-muted mb-0">
+        <small>Pedido #{{ pedidoAncancelar?.idPedido }} - Total: S/{{ (pedidoAncancelar?.total | number:'1.2-2') || '0.00' }}</small>
+      </p>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cerrarModal()" [disabled]="cancelandoPedido">
+        Volver
+      </button>
+      <button type="button" class="btn btn-danger" (click)="confirmarCancelacion()" [disabled]="cancelandoPedido">
+        <span *ngIf="!cancelandoPedido">Sí, Cancelar Pedido</span>
+        <span *ngIf="cancelandoPedido">
+          <span class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Procesando...</span>
+          </span>
+          Procesando...
+        </span>
+      </button>
+    </div>
+  </div>
 </div>
 
 <app-footer></app-footer>

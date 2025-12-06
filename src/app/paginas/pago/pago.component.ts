@@ -195,6 +195,7 @@ export class PagoComponent implements OnInit {
           console.error('Error al guardar pedido:', error);
           console.error('Error response:', error.error);
           console.error('Error status:', error.status);
+          console.error('Error statusText:', error.statusText);
           
           // Intentar extraer el mensaje de error del backend
           let mensajeError = 'Error al procesar el pedido. Por favor intenta nuevamente.';
@@ -204,6 +205,15 @@ export class PagoComponent implements OnInit {
             mensajeError = error.error.message;
           } else if (error.message) {
             mensajeError = error.message;
+          }
+          
+          // Si es 401, mostrar mensaje específico
+          if (error.status === 401) {
+            mensajeError = 'Tu sesión ha expirado. Por favor inicia sesión nuevamente.';
+            console.warn('Sesión expirada - redireccionar a login');
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 2000);
           }
           
           this.errorMsg = mensajeError;

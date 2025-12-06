@@ -40,6 +40,8 @@ export class PerfilComponent implements OnInit {
     const token = this.authService.obtenerToken();
     console.log('Token disponible en cargarPerfil:', !!token);
     console.log('Token value:', token);
+    console.log('Usuario autenticado según AuthService:', this.authService.estaAutenticado());
+    console.log('Rol del usuario:', this.authService.obtenerRolUsuario());
     
     this.authService.obtenerInfoUsuario().subscribe({
       next: (usuario: any) => {
@@ -53,6 +55,9 @@ export class PerfilComponent implements OnInit {
       error: (err) => {
         this.cargando = false;
         console.error('Error al cargar perfil:', err);
+        console.error('Error status:', err.status);
+        console.error('Error message:', err.statusText);
+        console.error('Error body:', err.error);
         this.errorMsg = 'No se pudo cargar el perfil. Por favor inicia sesión.';
       }
     });
