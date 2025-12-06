@@ -187,3 +187,12 @@
     }
 
 
+.botn{
+  border-radius: 8px;
+  background-color: #7f22d6;
+}
+
+.botn:hover{
+  background-color: #562eb5;
+}
+
