@@ -29,8 +29,8 @@
       <!-- Encabezado del pedido -->
       <div class="pedido-header">
         <div class="pedido-info">
-          <h5 class="mb-0">Pedido #{{ pedido.idPedido }}</h5>
-          <small class="text-muted">{{ formatearFecha(pedido.fechaPedido) }}</small>
+          <h5 class="mb-0">Pedido</h5>
+          <small class="">{{ formatearFecha(pedido.fechaPedido) }}</small>
         </div>
         <div class="pedido-estado">
           <span [ngClass]="obtenerClaseEstado(pedido.estado)" class="estado-badge">
@@ -42,7 +42,7 @@
       <!-- Detalles de productos -->
       <div class="pedido-body">
         <div class="detalles-productos">
-          <table class="table table-sm mb-0">
+          <table class="table table-sm mb-0 table-dark table-striped text-center mt-3">
             <thead>
               <tr>
                 <th>Producto</th>
@@ -78,9 +78,6 @@
                   class="btn btn-outline-danger btn-sm"
                   (click)="abrirModalCancelar(pedido)">
             🗑️ Cancelar Pedido
-          </button>
-          <button class="btn btn-outline-secondary btn-sm">
-            👁️ Ver Detalle
           </button>
         </div>
       </div>
