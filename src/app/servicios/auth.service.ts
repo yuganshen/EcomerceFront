@@ -375,7 +375,7 @@ export class AuthService {
           this.router.navigateByUrl('/');
         },
         error: (err) => {
-          console.error('Error al cerrar sesión:', err);
+          //console.error('Error al cerrar sesión:', err);
           
           // Aunque haya error, limpiar el cliente
           if (isPlatformBrowser(this.platformId)) {

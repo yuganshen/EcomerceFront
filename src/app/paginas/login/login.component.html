@@ -18,9 +18,7 @@
     <h2 class="text-3xl font-bold text-center mt-4 mb-6">Bienvenido a <span class="text-purple-400">GameCenter</span></h2>
 
     <!-- Mensaje de error -->
-    <div *ngIf="mensajeError" class="bg-red-500/20 border border-red-500 rounded-lg p-4 mb-4">
-      <p class="text-red-300 text-center">❌ {{ mensajeError }}</p>
-    </div>
+
 
     <!-- Formulario -->
     <form [formGroup]="formularioLogin" (ngSubmit)="login()" class="space-y-4">
