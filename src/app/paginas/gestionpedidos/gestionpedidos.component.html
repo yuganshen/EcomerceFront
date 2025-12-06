@@ -9,31 +9,32 @@
   <table class="table table-dark table-striped text-center mt-3">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Producto</th>
+        <th>Direccion de envio</th>
+        <th>Metodo de pago</th>
+        <th>Total</th>
         <th>Estado</th>
-        <th>Acciones</th>
+        <th>Cambiar de estado</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let o of orders">
-        <td>{{ o.id }}</td>
-        <td>{{ o.client }}</td>
-        <td>{{ o.product }}</td>
-        <td>{{ o.status }}</td>
+      <tr *ngFor="let p of pedidos">
+        <td>{{ p.direccionEnvio}}</td>
+        <td>{{ p.metodoPago }}</td>
+        <td>{{ p.total }}</td>
+        <td [ngClass]="{
+      'estado-pendiente': p.estado === 'PENDIENTE',
+      'estado-entregado': p.estado === 'ENTREGADO'
+        }">
+          {{ p.estado }}
+        </td>
+
 
         <td>
-          <button class="btn btn-warning btn-sm me-2"
-                  (click)="changeOrderStatus(o.id)">
+          <button class="btn btn-warning btn-sm me-2" (click)="cambiarEstado(p)">
             Cambiar Estado
           </button>
 
-          <button class="btn btn-info btn-sm"
-                  (click)="contactClient(o.client)">
-            Contactar
-          </button>
         </td>
       </tr>
     </tbody>

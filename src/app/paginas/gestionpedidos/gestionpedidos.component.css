@@ -48,3 +48,14 @@ button {
 .btn-info:hover {
   background-color: #1976d2;
 }
+
+
+.estado-pendiente {
+  color: #1976d2;       
+  font-weight: bold;
+}
+
+.estado-entregado {
+  color: green;        
+  font-weight: bold;
+}
